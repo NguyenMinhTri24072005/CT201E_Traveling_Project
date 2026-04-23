@@ -1,0 +1,77 @@
+/* ====================================================
+   CSS CHO HỒ SƠ CÁ NHÂN (ADMIN)
+   ==================================================== */
+
+.admin-profile-form {
+    padding: 30px;
+    max-width: 600px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.profile-form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form-group:last-of-type {
+    margin-bottom: 20px;
+}
+
+.profile-form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.profile-input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.profile-input:disabled {
+    background-color: #f0f0f0;
+    border-color: #ddd;
+    color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.profile-textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.btn-save-profile {
+    width: 100%;
+    padding: 12px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-save-profile:hover:not(:disabled) {
+    background-color: #1a242f;
+}
+
+.btn-save-profile:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}

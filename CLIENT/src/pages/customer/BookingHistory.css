@@ -1,0 +1,610 @@
+/* =========================================
+   CSS CHO THANH TIẾN TRÌNH (STEPPER)
+   ========================================= */
+.booking-stepper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin: 10px 0 25px 0;
+    padding: 25px 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.booking-stepper.cancelled {
+    justify-content: center;
+    background: #fdeaea;
+    border: 1px solid #fadbd8;
+    color: #e74c3c;
+    padding: 20px;
+}
+
+.step-aborted {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.step-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+    z-index: 1;
+}
+
+.step-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    transition: all 0.4s ease;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #e0e0e0;
+}
+
+.step-item.active .step-icon {
+    background: #2ecc71;
+    color: white;
+    box-shadow: 0 0 0 2px #2ecc71;
+}
+
+.step-item.current .step-icon {
+    background: #3498db;
+    color: white;
+    box-shadow: 0 0 0 2px #3498db, 0 0 15px rgba(52, 152, 219, 0.4);
+    transform: scale(1.1);
+}
+
+.step-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    text-align: center;
+}
+
+.step-item.active .step-label {
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.step-line {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    width: 100%;
+    height: 4px;
+    background: #e0e0e0;
+    z-index: -1;
+    transition: background 0.4s ease;
+}
+
+.step-item.active .step-line {
+    background: #2ecc71;
+}
+
+/* =========================================
+   CSS CHO LỊCH SỬ ĐẶT TOUR (BOOKING CARDS)
+   ========================================= */
+.history-page {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.history-title {
+    text-align: center;
+    color: #2d4271;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.booking-empty {
+    text-align: center;
+    margin-top: 50px;
+    background: #f8f9fa;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.booking-empty p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+}
+
+.btn-explore {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #e31837;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-explore:hover {
+    background: #c0392b;
+}
+
+.booking-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.booking-card-body {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.booking-thumbnail {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.booking-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.booking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.booking-header__split-1 {
+    width: 80%;
+}
+
+.booking-tour-name {
+    margin: 0 0 10px 0;
+    color: #2d4271;
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+.booking-meta {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.booking-customer-box {
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: #f0f4f8;
+    border-radius: 6px;
+    border-left: 3px solid #3498db;
+}
+
+.booking-customer-row {
+    margin-bottom: 4px;
+}
+
+.booking-customer-label {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.booking-customer-value {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.booking-customer-phone {
+    color: #555;
+}
+
+.badge-proxy {
+    font-size: 10px;
+    background: #f39c12;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.booking-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #eee;
+}
+
+.booking-total-label {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.booking-total-value {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #e31837;
+}
+
+.booking-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-booking {
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: filter 0.2s;
+}
+
+.btn-booking:hover {
+    filter: brightness(0.9);
+}
+
+.btn-details {
+    background: #3498db;
+}
+
+.btn-pay {
+    background: #27ae60;
+}
+
+.btn-cancel {
+    background: #e74c3c;
+}
+
+.btn-review {
+    background: #f39c12;
+    box-shadow: 0 2px 5px rgba(243, 156, 18, 0.3);
+}
+
+.btn-review-view {
+    background: #fdfdfd;
+    color: #f39c12;
+    border: 2px solid #f39c12;
+}
+
+/* Các nhãn Trạng Thái */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.status-badge.pending {
+    background: #f39c12;
+}
+
+.status-badge.verifying {
+    background: #8e44ad;
+}
+
+.status-badge.paid {
+    background: #2ecc71;
+}
+
+.status-badge.completed {
+    background: #3498db;
+}
+
+.status-badge.failed {
+    background: #e67e22;
+}
+
+.status-badge.cancelled {
+    background: #e74c3c;
+}
+
+.status-badge.default {
+    background: #95a5a6;
+}
+
+/* =========================================
+   CSS CHO POPUP (SWEETALERT2 HTML STRINGS)
+   ========================================= */
+
+/* --- Popup Chi Tiết Đơn Hàng --- */
+.swal-detail-container {
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.swal-detail-title {
+    color: #2d4271;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.swal-detail-title:first-child {
+    margin-top: 0;
+}
+
+.swal-detail-text {
+    margin: 5px 0;
+}
+
+.swal-detail-highlight {
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.swal-detail-subtext {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+.swal-passenger-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 10px 0;
+}
+
+.swal-passenger-item {
+    margin-bottom: 8px;
+}
+
+.swal-passenger-info {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin-left: 20px;
+}
+
+.swal-ticket-list {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.swal-ticket-item {
+    margin-bottom: 5px;
+}
+
+.swal-ticket-price {
+    color: #e31837;
+}
+
+.swal-payment-box {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.swal-payment-total {
+    margin: 0;
+}
+
+.swal-payment-total-value {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.swal-payment-method {
+    margin: 5px 0 0 0;
+    font-size: 0.9rem;
+}
+
+.swal-payment-method-value {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.swal-note-box {
+    background: #fff3e0;
+    padding: 10px;
+    border-radius: 5px;
+    border-left: 4px solid #f39c12;
+    margin: 10px 0;
+}
+
+/* --- Popup Đánh Giá (Review) --- */
+.swal-review-group {
+    text-align: left;
+    padding: 0 10px;
+}
+
+.swal-review-label {
+    font-weight: bold;
+    color: #2c3e50;
+    font-size: 14px;
+    display: block;
+    margin-top: 15px;
+}
+
+.swal-review-label:first-child {
+    margin-top: 5px;
+}
+
+.swal-review-select {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.swal-review-textarea {
+    width: 100%;
+    height: 100px;
+    margin-top: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+/* --- Popup Xem Đánh Giá --- */
+.swal-review-stars {
+    color: #f39c12;
+    font-size: 24px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.swal-review-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    font-style: italic;
+    color: #555;
+    border-left: 4px solid #f39c12;
+    text-align: left;
+}
+
+/* --- Popup Mã QR Thanh Toán --- */
+.qr-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.qr-modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.qr-modal-title {
+    color: #2d4271;
+    margin-bottom: 10px;
+}
+
+.qr-modal-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.qr-image {
+    border: 5px solid #2d4271;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    width: 200px;
+}
+
+.qr-info-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.qr-info-box p {
+    margin: 5px 0;
+}
+
+.qr-info-price {
+    color: #e31837;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.qr-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-qr-confirm {
+    width: 100%;
+    padding: 12px;
+    background: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-qr-close {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #7f8c8d;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+/* Responsive */
+@media (max-width: 600px) {
+    .step-label {
+        font-size: 0.75px;
+    }
+
+    .step-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .step-line {
+        top: 17px;
+    }
+
+    .booking-thumbnail {
+        width: 100%;
+        height: auto;
+    }
+
+    .booking-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .booking-header__split-1 {
+        width: 100%;
+    }
+
+    .booking-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .booking-actions {
+        flex-wrap: wrap;
+    }
+}

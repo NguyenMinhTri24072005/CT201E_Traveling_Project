@@ -1,0 +1,249 @@
+/* ====================================================
+   CSS CHO FORM THÊM TOUR (ADMIN)
+   ==================================================== */
+
+.add-tour-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.add-tour-form {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+/* Các Tiêu đề Mục (1. Thông tin cơ bản, 2. Lịch trình...) */
+.section-title {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    color: #2c3e50;
+}
+
+.section-title:first-child {
+    margin-top: 0;
+}
+
+/* Grid layout cho form */
+.form-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+/* Label & Input chuẩn */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label, 
+.form-group small {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+textarea.form-input {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.duration-group {
+    display: flex;
+    gap: 10px;
+}
+
+/* Grid Checkbox Tiện ích */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.amenity-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.amenity-checkbox input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Khối Lịch trình & Đợt khởi hành */
+.dynamic-block {
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.departure-block {
+    border-left: 4px solid #3498db;
+}
+
+.block-header {
+    display: block;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+/* Nút bấm (Buttons) */
+.btn-add-item {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #2c3e50;
+    transition: all 0.2s;
+}
+
+.btn-add-item:hover {
+    background: #bdc3c7;
+}
+
+.btn-submit-tour {
+    width: 100%;
+    padding: 15px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.btn-submit-tour:hover:not(:disabled) {
+    background: #c0392b;
+}
+
+.btn-submit-tour:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+.divider {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+/* ====================================================
+   BỔ SUNG CSS CHO FORM SỬA TOUR (EDIT TOUR)
+   ==================================================== */
+
+.current-image-preview {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px dashed #ccc;
+}
+
+.current-image-preview img {
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 10px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.btn-remove-item {
+    color: #e74c3c;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px;
+    transition: color 0.2s;
+}
+
+.btn-remove-item:hover {
+    color: #c0392b;
+    text-decoration: underline;
+}
+
+.departure-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Nút Submit riêng cho Edit Tour (Màu xanh lam thay vì đỏ) */
+.btn-update-tour {
+    width: 100%;
+    padding: 15px;
+    background: #2980b9;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+.btn-update-tour:hover:not(:disabled) {
+    background: #1f618d;
+}
+
+.btn-update-tour:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Căn chỉnh Input Tiêu đề Lịch trình để chừa chỗ cho Nút Xóa */
+.itinerary-day-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,516 @@
+/* ====================================================
+   CSS CHO TRANG CHI TIẾT TOUR (TOUR DETAIL)
+   ==================================================== */
+
+.tour-detail-page {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    color: #333;
+}
+
+.tour-loading-msg,
+.tour-error-msg {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.tour-error-msg {
+    color: #e74c3c;
+}
+
+.tour-hero-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.tour-image-col {
+    flex: 1 1 60%;
+}
+
+.tour-main-img {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tour-booking-col {
+    flex: 1 1 35%;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #eee;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+}
+
+.tour-title {
+    color: #2d4271;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.tour-rating-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.tour-star-icon { color: #f39c12; font-size: 1.4rem; font-weight: bold; }
+.tour-rating-score { font-size: 1.2rem; font-weight: bold; color: #2c3e50; }
+.tour-rating-count { color: #7f8c8d; font-size: 0.95rem; margin-left: 5px; }
+
+.tour-meta-info {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    color: #666;
+    flex-wrap: wrap;
+}
+
+.tour-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+/* ================= CHỌN NGÀY & ĐẶT VÉ ================= */
+.booking-section-title {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.departure-select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+    margin-bottom: 15px;
+}
+
+.departure-details-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #e31837;
+}
+
+.departure-transport {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.price-row.main-price {
+    margin-top: 10px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.price-highlight {
+    font-size: 1.5rem;
+    color: #e31837;
+    font-weight: bold;
+}
+
+.price-sub-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.btn-book-now {
+    width: 100%;
+    padding: 15px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-book-now.active {
+    background: #e31837;
+    cursor: pointer;
+}
+
+.btn-book-now.active:hover {
+    background: #c0392b;
+}
+
+.btn-book-now.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* ================= THÔNG TIN NHÀ CUNG CẤP ================= */
+.provider-info-box {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f4f9fd;
+    border-radius: 10px;
+    border: 1px solid #d6eaf8;
+}
+
+.provider-label {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+.provider-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.provider-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3498db;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.provider-name {
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.btn-view-shop {
+    padding: 6px 12px;
+    background: transparent;
+    color: #3498db;
+    border: 1px solid #3498db;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.btn-view-shop:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* ================= NỘI DUNG CHI TIẾT DƯỚI CÙNG ================= */
+.tour-content-section {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.tour-content-left {
+    flex: 1 1 60%;
+}
+
+.content-block {
+    margin-bottom: 40px;
+}
+
+.content-title {
+    border-bottom: 2px solid #e31837;
+    padding-bottom: 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #2d4271;
+}
+
+/* Điểm nhấn */
+.highlights-list {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    padding-left: 20px;
+    color: #333;
+}
+
+.highlights-list li {
+    margin-bottom: 10px;
+}
+
+/* Lịch trình */
+.itinerary-day-box {
+    margin-bottom: 25px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.itinerary-day-title {
+    color: #2d4271;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.itinerary-meals {
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 10px;
+}
+
+.itinerary-desc {
+    white-space: pre-line;
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+    text-align: justify;
+}
+
+/* ================= KHU VỰC ĐÁNH GIÁ (REVIEWS) ================= */
+.reviews-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 2px dashed #ccc;
+}
+
+.reviews-title {
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 10px;
+    display: inline-block;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.reviews-empty {
+    padding: 30px;
+    text-align: center;
+    background: #fef9e7;
+    border-radius: 10px;
+    color: #d35400;
+    border: 1px solid #fdebd0;
+}
+
+.reviews-empty-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-card {
+    display: flex;
+    gap: 20px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.review-avatar-box {
+    flex-shrink: 0;
+}
+
+.review-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f39c12;
+    padding: 2px;
+}
+
+.review-content {
+    flex: 1;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.reviewer-name {
+    color: #2c3e50;
+    font-size: 1.15rem;
+}
+
+.review-date {
+    color: #95a5a6;
+    font-size: 0.85rem;
+}
+
+.review-stars {
+    color: #f39c12;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+    font-size: 16px;
+}
+
+.review-text {
+    margin: 0;
+    color: #444;
+    line-height: 1.6;
+    font-size: 1rem;
+    font-style: italic;
+    text-align: justify;
+}
+
+/* ================= GỢI Ý TOUR (RECOMMENDATIONS) ================= */
+.recommendation-section {
+    margin-top: 50px;
+    border-top: 2px solid #eee;
+    padding-top: 30px;
+}
+
+.recommendation-title {
+    color: #2d4271;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recommendation-desc {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+.recommendation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .tour-hero-section {
+        flex-direction: column;
+    }
+    
+    .tour-booking-col {
+        position: static;
+    }
+    
+    .review-card {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+.tour-gallery-col {
+    width: 100%;
+}
+
+.main-image-container {
+    width: 100%;
+    height: 500px; /* Có thể tăng lên 550px hoặc 600px tùy ý bạn để nhìn đã mắt hơn */
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.tour-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s ease;
+}
+
+.thumbnail-list {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    overflow-x: auto; 
+    padding-bottom: 8px;
+    scrollbar-width: thin; 
+}
+
+.thumbnail-item {
+    width: 90px;
+    height: 65px;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0.6;
+    transition: 0.2s;
+    flex-shrink: 0;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail-item:hover,
+.thumbnail-item.active {
+    border-color: #FF5722; /* Màu chủ đạo Tây Bắc */
+    opacity: 1;
+}
+.tour-booking-col {
+    width: 100%;
+    background-color: #fff; /* Tuỳ chọn: thêm background và padding nếu muốn phần này tách biệt */
+    padding: 20px 0;
+}
+
+.itinerary-day-box-v2 {
+    display: flex;
+    gap: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #FF5722;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.itinerary-left { flex: 2; }
+
+.itinerary-right-img {
+    flex: 1;
+    max-width: 200px;
+}
+
+.itinerary-right-img img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .itinerary-day-box-v2 { flex-direction: column; }
+    .itinerary-right-img { max-width: 100%; }
+}

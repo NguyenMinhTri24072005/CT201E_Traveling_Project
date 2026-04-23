@@ -1,0 +1,264 @@
+/* ==================================================
+   BỐ CỤC TỔNG THỂ (LAYOUT)
+================================================== */
+.tour-list-page {
+    background-color: #f4f7f6;
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* Banner Hero */
+.tour-header-banner {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.tour-header-banner h1 {
+    margin: 0 0 10px 0;
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.tour-header-banner p {
+    margin: 0;
+    font-size: 1.15rem;
+    opacity: 0.9;
+}
+
+/* Container chính chia 2 cột - SỬ DỤNG CSS GRID CHỐNG LỖI */
+.tour-list-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    align-items: start; /* Quan trọng để Sidebar sticky hoạt động */
+}
+
+/* ==================================================
+   THANH BÊN (SIDEBAR BỘ LỌC)
+================================================== */
+.tour-sidebar {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    /* Hiệu ứng trượt dọc (Sticky) */
+    position: sticky;
+    top: 90px; 
+}
+
+.filter-group {
+    margin-bottom: 25px;
+}
+
+.filter-group:last-child {
+    margin-bottom: 0;
+}
+
+.filter-group h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f2f5;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+/* Input & Select */
+.search-input, .filter-select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #fdfdfd;
+    font-family: inherit;
+}
+
+.search-input:focus, .filter-select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: #fff;
+}
+
+/* Radio Buttons cho Mức giá */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #34495e;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.radio-group label:hover {
+    color: #e31837;
+}
+
+.radio-group input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #bdc3c7;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.radio-group input[type="radio"]:checked {
+    border-color: #e31837;
+}
+
+.radio-group input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background-color: #e31837;
+    border-radius: 50%;
+}
+
+/* ==================================================
+   KHU VỰC LƯỚI TOUR (TOUR GRID SECTION)
+================================================== */
+.tour-grid-section {
+    min-width: 0; /* Ngăn chặn lưới vượt khỏi container */
+}
+
+.tour-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+/* ==================================================
+   TRẠNG THÁI LOADING & KHÔNG TÌM THẤY (EMPTY STATE)
+================================================== */
+.loading-spinner, .no-tour-found {
+    text-align: center;
+    padding: 80px 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.loading-spinner {
+    font-size: 1.2rem;
+    color: #3498db;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.no-tour-found h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+
+.no-tour-found p {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+}
+
+.btn-reset {
+    background: #e31837;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(227, 24, 55, 0.2);
+}
+
+.btn-reset:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(227, 24, 55, 0.3);
+}
+
+/* ==================================================
+   THANH PHÂN TRANG (PAGINATION)
+================================================== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 40px;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    border: 1px solid #dcdde1;
+    background: #ffffff;
+    color: #2c3e50;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #f1f2f6;
+    border-color: #bdc3c7;
+}
+
+.pagination button.active {
+    background: #e31837;
+    color: white;
+    border-color: #e31837;
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #f9f9f9;
+}
+
+/* ==================================================
+   RESPONSIVE (THÍCH ỨNG MOBILE & TABLET)
+================================================== */
+@media (max-width: 900px) {
+    .tour-list-container {
+        grid-template-columns: 1fr; /* Gập về 1 cột trên Mobile/Tablet */
+    }
+    
+    .tour-sidebar {
+        position: static; /* Tắt sticky trên mobile để vuốt tự nhiên */
+        margin-bottom: 20px;
+    }
+}

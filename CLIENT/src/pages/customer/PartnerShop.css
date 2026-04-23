@@ -1,0 +1,249 @@
+/* ====================================================
+   CSS GIAN HÀNG ĐỐI TÁC (CHUẨN SHOPEE STYLE)
+   ==================================================== */
+
+.shopee-shop-wrapper {
+    background-color: #f5f5f5; /* Nền xám nhạt đặc trưng của TMĐT */
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
+
+/* --- 1. KHU VỰC HEADER GIAN HÀNG --- */
+.shopee-header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 0;
+}
+
+.shopee-header-card {
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+}
+
+.shopee-header-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6); /* Lớp phủ đen trong suốt */
+    backdrop-filter: blur(2px); /* Hiệu ứng mờ nền nhẹ */
+    z-index: 1;
+}
+
+.shopee-header-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    padding: 25px;
+    align-items: center;
+    gap: 30px;
+    color: white;
+}
+
+/* Phần trái: Avatar & Tên Shop */
+.shopee-header-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding-right: 20px;
+}
+
+.shopee-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    object-fit: cover;
+    background: #fff;
+}
+
+.shopee-shop-name {
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge-trusted {
+    font-size: 0.75rem;
+    background: #e31837; /* Màu đỏ thương hiệu */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.shopee-organizer-name {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Phần phải: Thống kê */
+.shopee-header-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding-left: 10px;
+}
+
+.shopee-stat-item {
+    display: flex;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.stat-label {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-value {
+    color: #fff;
+    font-weight: bold;
+}
+
+.stat-value.highlight {
+    color: #2ecc71; /* Chữ xanh lá nổi bật */
+}
+
+
+/* --- 2. KHU VỰC NỘI DUNG (BODY) --- */
+.shopee-body-container {
+    max-width: 1200px;
+    margin: 20px auto 0;
+    padding: 0 20px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start; /* Quan trọng: Không cho 2 cột bị kéo giãn bằng nhau */
+}
+
+/* Cột Trái: Sidebar (Rộng cố định) */
+.shopee-sidebar {
+    width: 250px;
+    flex-shrink: 0; /* Không bao giờ bị ép nhỏ lại */
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 90px;
+}
+
+.shopee-section-title {
+    font-size: 1.1rem;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.shopee-description {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+    white-space: pre-line;
+}
+
+.shopee-policies {
+    margin-top: 25px;
+    background: #fff9e6;
+    border: 1px solid #fae8b1;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.shopee-policies p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #d35400;
+    line-height: 1.5;
+}
+
+
+/* Cột Phải: Danh sách Tour (Co giãn linh hoạt) */
+.shopee-main-content {
+    flex: 1;
+    min-width: 0; /* Quan trọng: Ngăn chặn Flexbox bị tràn bố cục khi lưới Tour quá to */
+    background: transparent;
+}
+
+.shopee-tours-header {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.shopee-tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
+}
+
+.shopee-empty-msg {
+    background: white;
+    padding: 50px;
+    text-align: center;
+    border-radius: 8px;
+    color: #777;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+/* --- 3. RESPONSIVE CHO ĐIỆN THOẠI & TABLET --- */
+@media (max-width: 992px) {
+    /* Gập Header */
+    .shopee-header-content {
+        flex-direction: column;
+        padding: 20px;
+    }
+    
+    .shopee-header-left {
+        border-right: none;
+        border-bottom: 1px dashed rgba(255,255,255,0.3);
+        padding-right: 0;
+        padding-bottom: 20px;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column; /* Avatar nằm trên Tên Shop */
+    }
+
+    .shopee-header-right {
+        padding-left: 0;
+        width: 100%;
+    }
+
+    .shopee-stat-item {
+        justify-content: center;
+    }
+
+    /* Gập Body */
+    .shopee-body-container {
+        flex-direction: column;
+    }
+
+    .shopee-sidebar {
+        width: 100%;
+        position: static; /* Tắt sticky trên đt */
+    }
+
+    .shopee-main-content {
+        width: 100%;
+    }
+}

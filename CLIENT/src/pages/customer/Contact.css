@@ -1,0 +1,144 @@
+/* ====================================================
+   CSS CHO TRANG LIÊN HỆ (CONTACT US)
+   ==================================================== */
+
+.contact-header {
+    background: #2d4271;
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.contact-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: -40px auto 60px;
+    display: flex;
+    gap: 40px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* --- CỘT TRÁI: THÔNG TIN LIÊN HỆ --- */
+.contact-info {
+    flex: 1;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.contact-info h2 {
+    color: #2d4271;
+    margin-bottom: 15px;
+}
+
+.info-desc {
+    color: #666;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.info-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+    align-items: flex-start;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: #f0f4f8;
+    color: #e31837;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.info-item strong {
+    color: #2c3e50;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-item p {
+    color: #555;
+    margin: 0;
+}
+
+/* --- CỘT PHẢI: FORM GỬI TIN NHẮN --- */
+.contact-form-wrapper {
+    flex: 1;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.contact-form-wrapper h2 {
+    color: #2d4271;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.input-group input:focus, 
+.input-group textarea:focus {
+    outline: none;
+    border-color: #2d4271;
+}
+
+.btn-submit-contact {
+    width: 100%;
+    padding: 15px;
+    background: #e31837;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit-contact:hover {
+    background: #c0392b;
+}
+
+/* --- GOOGLE MAPS --- */
+.contact-map iframe {
+    width: 100%;
+    display: block;
+}
+
+/* --- RESPONSIVE CHO ĐIỆN THOẠI --- */
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,131 @@
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f9;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-brand {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+}
+
+/* Đã xóa padding và border trùng lặp, gán màu trực tiếp vào class */
+.admin-brand a.brand-link {
+    color: #e31837;
+    text-decoration: none;
+}
+
+.admin-brand h2 {
+    color: #e74c3c;
+    margin: 0 0 5px 0;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    flex-grow: 1;
+}
+
+.admin-nav a {
+    color: #bdc3c7;
+    text-decoration: none;
+    padding: 15px 25px;
+    transition: 0.3s;
+    font-size: 1.1rem;
+    display: flex;          /* Thêm flex để căn giữa chữ và Icon */
+    align-items: center;    
+    gap: 8px;               
+}
+
+.admin-nav a:hover, .admin-nav a.active {
+    background-color: #34495e;
+    color: white;
+    border-left: 4px solid #e74c3c;
+}
+
+/* CSS cho icon react-icons/fi */
+.nav-icon {
+    font-size: 1.1rem;
+}
+
+.btn-admin-logout {
+    margin: 20px;
+    padding: 12px;
+    background-color: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Main Content */
+.admin-main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background-color: white;
+    padding: 20px 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.admin-content-area {
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Custom CSS cho SweetAlert2 Form */
+.swal-form-container {
+    text-align: left;
+    padding: 10px 5px;
+}
+
+.swal-form-group {
+    margin-bottom: 15px;
+}
+
+.swal-form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #34495e;
+    font-size: 14px;
+}
+
+.swal2-popup .swal-form-input {
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px;
+    margin: 0; 
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.swal2-popup .swal-form-input:focus {
+    border-color: #409eff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(64, 158, 255, 0.2);
+}
+
+.swal2-popup select.swal-form-input {
+    cursor: pointer;
+    background-color: #fff;
+}

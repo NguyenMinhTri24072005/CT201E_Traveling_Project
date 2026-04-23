@@ -1,0 +1,26 @@
+/* ====================================================
+   CSS CHO QUẢN LÝ ĐƠN HÀNG (ADMIN)
+   ==================================================== */
+
+.admin-loading-text {
+    padding: 20px;
+    color: #2d4271;
+}
+
+.admin-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Kế thừa từ filter-label nhưng có màu nhấn riêng cho Admin */
+.filter-label.partner-highlight {
+    color: #e31837;
+}
+
+/* Kế thừa từ filter-input nhưng nổi bật hơn */
+.filter-input.partner-highlight {
+    color: #e31837;
+    font-weight: bold;
+}

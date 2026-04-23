@@ -1,0 +1,136 @@
+/* ====================================================
+   CSS DÙNG CHUNG CHO ĐĂNG NHẬP & ĐĂNG KÝ
+   ==================================================== */
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f4f6f9;
+}
+
+.login-container {
+    background: white;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    margin: 40px auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.login-container.register {
+    max-width: 550px;
+}
+
+.login-container h2 {
+    color: #2d4271;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+/* --- Khối Hiển Thị Lỗi --- */
+.error-message {
+    color: white;
+    background: #e31837;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+/* --- Form --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.input-group input:focus {
+    border-color: #e31837;
+}
+
+/* --- Khối Chọn Quyền (Chỉ có ở Register) --- */
+.role-selector {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.role-option {
+    display: inline-block;
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.role-radio {
+    width: auto !important;
+    margin-right: 8px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+/* --- Nút Bấm & Footer --- */
+.btn-login {
+    background: #2d4271;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: #1a2a4f;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.login-footer a {
+    color: #e31837;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.login-footer a:hover {
+    color: #c0392b;
+}

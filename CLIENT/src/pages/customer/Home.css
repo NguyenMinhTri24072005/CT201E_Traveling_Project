@@ -1,0 +1,365 @@
+/* ================= TỔNG QUAN & TÁI SỬ DỤNG ================= */
+.home-page {
+    background-color: #f8f9fa;
+    padding-bottom: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    color: #2d4271;
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* ================= HERO BANNER ================= */
+.hero-section {
+    position: relative;
+    height: 75vh;
+    min-height: 600px;
+    /* BỔ SUNG MÀU NỀN DỰ PHÒNG KHI ẢNH LỖI TẢI */
+    background-color: #2d4271;
+    background-image: linear-gradient(135deg, rgba(45, 66, 113, 0.4), rgba(227, 24, 55, 0.2)), 
+                      url('../../assets/images/home-images/mu-cang-chai.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px;
+    transform: translateY(-20px);
+}
+
+.hero-title {
+    color: white;
+    font-size: 3.8rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    color: #f1f2f6;
+    font-size: 1.3rem;
+    margin-bottom: 50px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ================= THANH TÌM KIẾM NỔI ================= */
+.search-box {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 16px;
+    display: flex;
+    gap: 0;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.search-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    border-right: 1px solid #e1e8ed;
+    padding: 15px 25px;
+    justify-content: center;
+}
+
+.search-item:last-child {
+    border-right: none;
+}
+
+.search-item label {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-icon {
+    color: #e31837;
+    font-size: 1.1rem;
+}
+
+.search-item input,
+.search-item select {
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn-search-main {
+    background: linear-gradient(135deg, #e31837, #c0392b);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    margin-left: 10px;
+}
+
+.btn-search-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(227, 24, 55, 0.4);
+}
+
+/* ================= ĐIỂM ĐẾN NỔI BẬT ================= */
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.destination-card {
+    position: relative;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    background-color: #e1e8ed; /* Nền xám khi load ảnh */
+}
+
+.destination-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.destination-card:hover img {
+    transform: scale(1.1);
+}
+
+.dest-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+}
+
+.dest-overlay h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* ================= VÌ SAO CHỌN CHÚNG TÔI ================= */
+.features-section {
+    background-color: white;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.feature-card {
+    padding: 30px 20px;
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.feat-icon {
+    width: 70px;
+    height: 70px;
+    background: #fef1f2;
+    color: #e31837;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    margin: 0 auto 20px;
+}
+
+.feature-card h3 {
+    color: #2d4271;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ================= TOUR NỔI BẬT ================= */
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.no-tour-msg {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 1.1rem;
+    padding: 40px;
+}
+
+.btn-view-all-wrapper {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-view-all {
+    background: transparent;
+    color: #e31837;
+    border: 2px solid #e31837;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-view-all:hover {
+    background: #e31837;
+    color: white;
+}
+
+/* ================= CALL TO ACTION (CTA) ================= */
+.cta-section {
+    position: relative;
+    /* BỔ SUNG MÀU NỀN DỰ PHÒNG KHI ẢNH LỖI TẢI */
+    background-color: #2d4271;
+    background-image: url('https://images.unsplash.com/photo-1542662565-7e4b66ae52d5?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.cta-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(45, 66, 113, 0.85); /* Màu xanh than trong suốt */
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.btn-cta {
+    background: #f1c40f;
+    color: #2c3e50;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.btn-cta:hover {
+    background: #f39c12;
+    transform: scale(1.05);
+}
+
+/* ================= RESPONSIVE ĐIỆN THOẠI ================= */
+@media (max-width: 900px) {
+    .search-box {
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 12px;
+    }
+    
+    .search-item {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 12px 5px;
+    }
+    
+    .btn-search-main {
+        margin: 15px 0 0 0;
+        padding: 15px;
+    }
+
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .cta-content h2 { font-size: 2rem; }
+}

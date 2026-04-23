@@ -1,0 +1,200 @@
+/* ====================================================
+   CSS CHO TRANG GIỚI THIỆU (ABOUT US)
+   ==================================================== */
+
+.about-page {
+    width: 100%;
+    background-color: #ffffff;
+}
+
+/* --- HERO BANNER --- */
+.about-hero {
+    position: relative;
+    height: 40vh;
+    min-height: 300px;
+    /* KỸ THUẬT FALLBACK: Nếu ảnh lỗi, dải màu Xanh Navy -> Đỏ sẽ hiển thị */
+    background-color: #2d4271; 
+    background-image: linear-gradient(135deg, rgba(45, 66, 113, 0.85), rgba(227, 24, 55, 0.7)), 
+                      url('https://images.unsplash.com/photo-1583501306385-de21e102e3b1?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Làm tối thêm một chút để chữ trắng nổi bật tuyệt đối */
+    background: rgba(0, 0, 0, 0.2); 
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.about-hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 4px 8px rgba(0,0,0,0.4);
+    letter-spacing: 1px;
+}
+
+.about-hero-content p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.4);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+/* --- PHẦN CÂU CHUYỆN (STORY) --- */
+.about-story {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.story-text {
+    flex: 1;
+}
+
+.story-text h2 {
+    color: #2d4271;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.story-text h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 4px;
+    background-color: #e31837;
+    border-radius: 2px;
+}
+
+.story-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.story-image {
+    flex: 1;
+    position: relative;
+}
+
+/* KỸ THUẬT FALLBACK CHO ẢNH LỖI */
+.story-image img {
+    width: 100%;
+    min-height: 350px;
+    background: #f1f2f6; /* Màu nền xám nhạt nếu ảnh không load được */
+    color: #7f8c8d;      /* Màu chữ của thuộc tính alt="Ruộng bậc thang" */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.story-image img:hover {
+    transform: translateY(-5px);
+}
+
+/* --- PHẦN GIÁ TRỊ CỐT LÕI (VALUES) --- */
+.text-center {
+    text-align: center;
+    color: #2d4271;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.value-card {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid #f1f2f6;
+    border-bottom: 4px solid transparent;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.value-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 4px solid #e31837;
+    box-shadow: 0 15px 30px rgba(227, 24, 55, 0.08);
+}
+
+.value-icon {
+    font-size: 3.5rem;
+    color: #e31837;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #fdf2f2;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.value-card h3 {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.value-card p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .about-story {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .about-hero-content h1 {
+        font-size: 2.5rem;
+    }
+}

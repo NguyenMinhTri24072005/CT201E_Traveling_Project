@@ -1,0 +1,219 @@
+/* =========================================
+   Dashboard.css - Dành cho cả Admin & Partner
+   ========================================= */
+
+.dashboard-page {
+    padding: 10px 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-title {
+    color: #2d4271;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f0f2f5;
+    padding-bottom: 15px;
+}
+
+.dashboard-alert {
+    padding: 20px;
+    color: #e74c3c;
+}
+
+.dashboard-loading {
+    text-align: center;
+    color: #7f8c8d;
+    margin: 40px 0;
+}
+
+/* =========================================
+   KHU VỰC THANH CÔNG CỤ LỌC (FILTER BAR)
+   ========================================= */
+.dashboard-filter-bar {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-bar-partner {
+    border-left: 4px solid #2ecc71; /* Viền xanh lá cho Partner */
+}
+
+.filter-bar-admin {
+    /* Mặc định cho Admin (có thể thêm viền đỏ nếu muốn) */
+}
+
+.dashboard-filter-group {
+    flex: 1 1 200px;
+}
+
+.dashboard-filter-group.large {
+    flex: 1 1 300px;
+}
+
+.dashboard-filter-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.dashboard-filter-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.btn-apply-filter {
+    padding: 10px 25px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    transition: filter 0.2s;
+}
+
+.btn-apply-filter:hover {
+    filter: brightness(0.9);
+}
+
+.btn-filter-partner { background: #2ecc71; }
+.btn-filter-admin { background: #e31837; }
+
+/* =========================================
+   KHU VỰC THẺ THỐNG KÊ (GRID)
+   ========================================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #f8f9fa;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.stat-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.stat-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+.stat-info p {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #2c3e50;
+    letter-spacing: 0.5px;
+}
+
+/* Các Class màu sắc tự custom cho thẻ */
+.card-revenue .stat-icon { background: #f8f9fa; color: #7f8c8d; }
+.card-revenue .stat-info p { color: #34495e; }
+
+.card-net .stat-card { background: #f0fdf4; border-color: #2ecc71; }
+.card-net .stat-icon { background: #2ecc71; color: #fff; }
+.card-net .stat-info p { color: #27ae60; font-size: 1.8rem; }
+
+.card-admin-profit .stat-card { background: #fdfaf6; border-color: #f39c12; }
+.card-admin-profit .stat-icon { background: #f39c12; color: #fff; }
+.card-admin-profit .stat-info p { color: #d35400; font-size: 1.8rem; }
+
+.card-orders .stat-icon { background: #e8f4f8; color: #3498db; }
+.card-orders .stat-info p { color: #2980b9; }
+
+.card-tours .stat-icon { background: #fdf2f2; color: #e74c3c; }
+.card-tours .stat-info p { color: #c0392b; }
+
+
+/* =========================================
+   KHU VỰC BIỂU ĐỒ
+   ========================================= */
+.chart-section-wrapper {
+    margin-top: 30px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.chart-section-title {
+    color: #2d4271;
+    border-bottom: 2px solid #f1f2f6;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.chart-empty {
+    text-align: center;
+    color: #95a5a6;
+    padding: 30px;
+}
+
+.chart-container {
+    width: 100%;
+    min-height: 350px;
+}
+
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+    border-radius: 8px !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+    padding: 10px 15px !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .chart-section-wrapper { padding: 15px; }
+}
