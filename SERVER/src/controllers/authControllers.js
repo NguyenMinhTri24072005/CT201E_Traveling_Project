@@ -87,7 +87,6 @@ const authControllers = {
                     }
                 )
 
-                console.log("accessToken trong authController", accessToken)
                 const { password: storedPassword, ...others } = user._doc;
 
                 // SỬA LẠI ĐOẠN NÀY ĐỂ FRONTEND NHẬN ĐÚNG DỮ LIỆU

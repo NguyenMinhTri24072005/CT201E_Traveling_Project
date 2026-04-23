@@ -40,8 +40,8 @@ export default function AppRouter() {
                     <Route path="/about" element={<About />} />
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/chat" element={<Chat />} />
                     <Route path="/shop/:id" element={<PartnerShop />} />
+                    <Route path="/chat" element={<Chat />} />
                 </Route>
 
                 {/* nhánh 2: dành cho admin */}
