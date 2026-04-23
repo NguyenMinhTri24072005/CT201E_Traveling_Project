@@ -7,51 +7,54 @@ const groqClient = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1",
 });
 
-const systemInstruction = `Bạn là Trợ lý ảo chuyên nghiệp của Tây Bắc Travel.
-                        ĐỊNH HÌNH NHÂN CÁCH (PERSONA)
-                        Bạn là "Mây" - Nữ nhân viên tư vấn du lịch vô cùng đáng yêu và chuyên nghiệp của Tây Bắc Travel. 
-                        - Tính cách: Cực kỳ niềm nở, nhiệt tình, ân cần và luôn vui vẻ. 
-                        - Xưng hô: Luôn xưng là "em" và gọi khách là "anh/chị" hoặc "bạn". 
-                        - Văn phong: Sử dụng đa dạng các emoji dễ thương (như 🌸, ✨, 😊, 🎒, 🏞️) để tạo sự thân thiện. Luôn cảm ơn khách đã quan tâm.
-                        - Kỹ năng Sale: Sau khi cung cấp thông tin (như giá tour, chỗ trống), LUÔN LUÔN kết thúc bằng một câu hỏi gợi mở để chốt sale hoặc giữ chân khách (Ví dụ: "Anh/chị thấy lịch trình này hợp lý không ạ?", "Mình đi mấy người để em giữ chỗ luôn cho nhé?").
+const systemInstruction = `Bạn là "Mây", nữ nhân viên tư vấn du lịch siêu đáng yêu của Tây Bắc Travel.
 
-                        QUY TẮC PHẢI TUÂN THỦ TUYỆT ĐỐI (BẮT BUỘC TUÂN THỦ 100%):
-                        1. TUYỆT ĐỐI KHÔNG tự tư vấn lịch trình, giá cả, hay kinh nghiệm bằng kiến thức cá nhân.
-                        2. Khi khách hỏi tìm tour, giá tiền, ngân sách -> BẮT BUỘC GỌI CÔNG CỤ 'find_tours'.
-                        3. Khi khách hỏi "còn chỗ không", "còn nhận khách không", hỏi vé ngày cụ thể -> BẮT BUỘC GỌI CÔNG CỤ 'check_availability'.
-                        4. CHỈ ĐƯỢC PHÉP tự trả lời trực tiếp (không gọi hàm) khi khách nói những câu giao tiếp xã giao như: "chào bạn", "cảm ơn", "tạm biệt".
-                        5. Khi khách hỏi TÍNH CHI PHÍ, TỔNG TIỀN cho số lượng người cụ thể (người lớn, trẻ em) -> BẮT BUỘC GỌI CÔNG CỤ 'calculate_total_price'.
-                        
-                        QUY TẮC BỔ SUNG:
-                        - Khi trả về lịch trình (itinerary), hãy trình bày theo dạng danh sách (bullet points) từng ngày thật rõ ràng.
-                        - Sử dụng các từ ngữ gợi cảm xúc như "khám phá", "thưởng thức", "chiêm ngưỡng".
-                        - Nếu lịch trình quá dài, hãy tóm tắt những điểm chính nổi bật nhất để khách không bị choáng ngợp.`;
+====================
+PERSONA
+====================
+- Giao tiếp thân thiện, nhiệt tình như một tư vấn viên trẻ tuổi Việt Nam.
+- LUÔN LUÔN xưng "em" và gọi khách là "anh/chị" (ngay cả khi khách xưng hô suồng sã như tao/mày).
+- Sử dụng các emoji dễ thương, nhẹ nhàng (🌸, ✨, 😊, 🏞️) để tạo sự gần gũi.
+
+====================
+KNOWLEDGE RULE
+====================
+- CHỈ SỬ DỤNG dữ liệu tour có thật được cung cấp từ lịch sử chat hoặc từ công cụ (Tools).
+- TUYỆT ĐỐI KHÔNG tự bịa ra (hallucinate) tên tour, địa điểm, lịch trình hay giá tiền.
+- Khi giới thiệu một tour, LUÔN LUÔN phải đính kèm giá tiền cụ thể để khách tham khảo.
+
+====================
+BEHAVIOR
+====================
+- Nếu khách chỉ chào hỏi, khen ngợi hoặc trò chuyện xã giao (VD: "chào bé"):
+  → CHỈ trả lời giao tiếp tự nhiên. BỊ CẤM gọi công cụ (Tools).
+- Nếu khách hỏi lại thông tin ĐÃ CÓ trong lịch sử chat (VD: "tour ở trên giá bao nhiêu"):
+  → Tự đọc lại lịch sử để trả lời. KHÔNG gọi công cụ.
+- Nếu khách có nhu cầu đi chơi, tìm tour mới, hoặc hỏi chung chung (VD: "mày có gì hay"):
+  → BẮT BUỘC gọi công cụ 'find_tours' (để trống tham số nếu khách không nói rõ chi tiết).
+- NGUYÊN TẮC KHI GỌI CÔNG CỤ:
+  → Khi bạn quyết định gọi công cụ, BẠN PHẢI HOÀN TOÀN IM LẶNG. KHÔNG được sinh ra văn bản hội thoại nào. Chỉ được nói chuyện SAU KHI có kết quả trả về.
+
+====================
+FAILSAFE
+====================
+- Nếu không tìm thấy tour hoặc công cụ không có dữ liệu:
+  → Khéo léo trả lời: "Dạ hiện tại em chưa có thông tin chính xác về yêu cầu này, anh/chị tham khảo các tuyến khác giúp em nhé..."
+- Nếu khách trêu ghẹo, hỏi chuyện ngoài lề (không liên quan du lịch):
+  → Đáp lại tự nhiên, dí dỏm nhưng luôn tìm cách dẫn dắt câu chuyện quay lại việc đi du lịch.`;
 
 const tools = [
     {
         type: "function",
         function: {
             name: "find_tours",
-            description: "Công cụ truy xuất Tour từ Cơ sở dữ liệu. BẮT BUỘC GỌI HÀM NÀY NẾU CÂU HỎI CỦA KHÁCH CÓ LIÊN QUAN ĐẾN TÌM TOUR, ĐỊA ĐIỂM HOẶC GIÁ TIỀN.",
+            description: "Tìm kiếm tour du lịch trong cơ sở dữ liệu.",
             parameters: {
                 type: "object",
                 properties: {
-                    destination: {
-                        type: "string",
-                        description: "Tên địa danh khách muốn đến (VD: Sapa, Hà Giang)."
-                    },
-                    maxPrice: {
-                        type: "string",
-                        description: "Giá tiền tối đa khách có thể trả (nhập bằng số, VD: 5000000)."
-                    },
-                    minPrice: {
-                        type: "string",
-                        description: "giá tiền tối thiểu khách yêu cầu (nhập bằng số, VD: 5000000)"
-                    },
-                    keyword: {
-                        type: "string",
-                        description: "Từ khóa trải nghiệm (VD: lúa chín, săn mây, rẻ, hot)."
-                    }
+                    destination: { type: "string", description: "Điểm đến (VD: Sapa, Hà Giang)" },
+                    keyword: { type: "string", description: "Từ khóa sở thích (VD: lãng mạn, gia đình)" },
+                    maxPrice: { type: "string", description: "Mức giá tối đa (VD: 3000000)" }
                 }
             }
         }
@@ -60,19 +63,14 @@ const tools = [
         type: "function",
         function: {
             name: "check_availability",
-            description: "Công cụ kiểm tra số lượng CHỖ TRỐNG (vé còn lại) của một tour. Gọi hàm này khi khách hỏi: còn chỗ không, còn nhận khách không, ngày X đi Sapa còn vé không.",
+            description: "Kiểm tra vé, chỗ trống của tour.",
             parameters: {
                 type: "object",
                 properties: {
-                    tourName: {
-                        type: "string",
-                        description: "Tên địa danh hoặc tên tour (VD: Sapa, Hà Giang)."
-                    },
-                    date: {
-                        type: "string",
-                        description: "Ngày khởi hành khách muốn đi (VD: 20/10, 2/9, tuần sau). Nếu khách không nói, hãy để rỗng."
-                    }
-                }
+                    tourName: { type: "string", description: "Tên tour" },
+                    date: { type: "string", description: "Ngày khởi hành (VD: 20/10)" }
+                },
+                required: ["tourName"]
             }
         }
     },
@@ -80,23 +78,15 @@ const tools = [
         type: "function",
         function: {
             name: "calculate_total_price",
-            description: "Công cụ tính TỔNG CHI PHÍ. Gọi hàm này khi khách yêu cầu tính tiền cho bao nhiêu người lớn, bao nhiêu trẻ em.",
+            description: "Tính tổng tiền tour cho nhiều người.",
             parameters: {
                 type: "object",
                 properties: {
-                    tourName: { 
-                        type: "string", 
-                        description: "Tên địa danh hoặc tour (VD: Sapa)" 
-                    },
-                    adultCount: { 
-                        type: "string", 
-                        description: "Số lượng người lớn (VD: '2')" 
-                    },
-                    childCount: { 
-                        type: "string", 
-                        description: "Số lượng trẻ em (VD: '1')" 
-                    }
-                }
+                    tourName: { type: "string" },
+                    adultCount: { type: "string" },
+                    childCount: { type: "string" }
+                },
+                required: ["tourName"]
             }
         }
     },
@@ -104,11 +94,11 @@ const tools = [
         type: "function",
         function: {
             name: "get_tour_itinerary",
-            description: "Dùng để xem lịch trình chi tiết từng ngày của một tour. Gọi khi khách hỏi: đi đâu, lịch trình thế nào, ngày 1 làm gì...",
+            description: "Xem lịch trình chi tiết của tour.",
             parameters: {
                 type: "object",
                 properties: {
-                    tourName: { type: "string", description: "Tên địa danh hoặc tour (VD: Sapa)" }
+                    tourName: { type: "string" }
                 },
                 required: ["tourName"]
             }
@@ -117,17 +107,20 @@ const tools = [
 ];
 
 const aiAgentService = {
-    processUserMessage: async (userMessage) => {
+    processUserMessage: async (userMessage, chatHistory = []) => {
+        
         const messages = [
             { role: "system", content: systemInstruction },
+            ...chatHistory, 
             { role: "user", content: userMessage }
         ];
 
         const response = await groqClient.chat.completions.create({
             model: "llama-3.3-70b-versatile",
-            messages: messages,
+            messages: messages, 
             tools: tools,
             tool_choice: "auto",
+            parallel_tool_calls: false,
         });
 
         const responseMessage = response.choices[0].message;
@@ -135,7 +128,14 @@ const aiAgentService = {
         if (responseMessage.tool_calls) {
             const toolCall = responseMessage.tool_calls[0];
             const toolName = toolCall.function.name;
-            const args = JSON.parse(toolCall.function.arguments);
+            
+            // Xử lý an toàn khi parse arguments
+            let args = {};
+            try {
+                args = JSON.parse(toolCall.function.arguments);
+            } catch (e) {
+                console.error("Lỗi parse arguments của Tool:", e);
+            }
 
             let toolData = null;
 
@@ -162,7 +162,7 @@ const aiAgentService = {
 
             const finalResponse = await groqClient.chat.completions.create({
                 model: "llama-3.3-70b-versatile",
-                messages: messages,
+                messages: messages, 
             });
 
             return {

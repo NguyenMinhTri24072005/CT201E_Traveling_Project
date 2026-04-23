@@ -58,7 +58,8 @@ const tourSchema = new mongoose.Schema({
         default: '' 
     },
     averageRating: { type: Number, default: 0 }, // Điểm sao trung bình (VD: 4.8)
-    totalReviews: { type: Number, default: 0 }
+    totalReviews: { type: Number, default: 0 },
+    embeddingVector: { type: [Number], select: false } // select: false để ẩn đi khi API thường gọi đến, cho nhẹ mạng
 }, { timestamps: true })
 
 module.exports = mongoose.model('Tour', tourSchema)

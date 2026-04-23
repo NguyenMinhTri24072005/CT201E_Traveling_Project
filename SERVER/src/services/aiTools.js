@@ -1,45 +1,37 @@
 const Tour = require('../models/Tours');
+const { semanticSearchLocal } = require('./rag/retrievalService');
 
 const aiTools = {
     executeFindTours: async (args) => {
         try {
-            console.log("TOOL EXECUTION] Đang chạy công cụ 'find_tours' với tham số:", args);
+            console.log("[TOOL EXECUTION] Đang chạy công cụ 'find_tours' VỚI RAG:", args);
             const { destination, maxPrice, keyword } = args || {};
-            let query = { status: 'Approved' };
-            if (destination && typeof destination === 'string' && destination.toLowerCase() !== "tây bắc") {
-                const searchRegex = destination.trim().split(' ').join('.*');
-                query.$or = [
-                    { name: { $regex: searchRegex, $options: 'i' } },
-                    { departureLocation: { $regex: searchRegex, $options: 'i' } }
-                ];
+            
+            // 1. Gộp các từ khóa thành 1 câu truy vấn để RAG hiểu ngữ nghĩa
+            const searchQuery = `${destination || ''} ${keyword || ''}`.trim();
+            let tours = [];
+
+            if (searchQuery) {
+                // 👉 CHÚ THÍCH Ở ĐÂY: Gọi RAG để tìm kiếm theo vector
+                tours = await semanticSearchLocal(searchQuery);
+            } else {
+                // Fallback nếu khách không nhập gì
+                tours = await Tour.find({ status: 'Approved' }).limit(3).lean();
             }
 
-            if (maxPrice) {
+            // 2. Nếu khách có yêu cầu maxPrice, ta lọc lại kết quả RAG bằng giá
+            if (maxPrice && tours.length > 0) {
                 const parsedPrice = parseInt(maxPrice, 10);
                 if (!isNaN(parsedPrice) && parsedPrice > 0) {
-                    query['departures.adultPrice'] = { $lte: parsedPrice };
+                    tours = tours.filter(t => 
+                        t.departures && t.departures.some(d => d.adultPrice <= parsedPrice)
+                    );
                 }
             }
 
-            if (keyword && typeof keyword === 'string') {
-                const kwRegex = keyword.trim().split(' ').join('.*');
-                query.$or = query.$or || [];
-                query.$or.push(
-                    { name: { $regex: kwRegex, $options: 'i' } },
-                    { highlights: { $regex: kwRegex, $options: 'i' } }
-                );
-            }
-
-            let tours = await Tour.find(query)
-                .select('name duration departureLocation departures highlights')
-                .limit(3)
-                .lean();
             if (tours.length === 0) {
                 console.log("[TOOL] Không tìm thấy, kích hoạt Fallback lấy 3 tour ngẫu nhiên...");
-                tours = await Tour.find({ status: 'Approved' })
-                    .select('name duration departureLocation departures')
-                    .limit(3)
-                    .lean();
+                tours = await Tour.find({ status: 'Approved' }).limit(3).lean();
             }
 
             return tours;

@@ -4,7 +4,7 @@ const aiAgentService = require('../services/aiAgentService');
 const chatControllers = {
     handleChat: async (req, res) => {
         try {
-            const { message } = req.body;
+            const { message, chatHistory } = req.body;
             if (!message) return res.status(400).json({ error: "Tin nhắn không được để trống" });
 
             const sensitiveWords = ["đéo", "nín", "cút", "vcl"];
@@ -19,9 +19,9 @@ const chatControllers = {
 
             console.log("\nKhách hàng:", message);
 
-            const agentResponse = await aiAgentService.processUserMessage(message);
+            const aiResponse = await aiAgentService.processUserMessage(message, chatHistory);
 
-            return res.status(200).json(agentResponse);
+            return res.status(200).json(aiResponse);
 
         } catch (error) {
             if (error.status === 503 || error.status === 429) {
