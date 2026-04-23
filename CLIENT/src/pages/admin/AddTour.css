@@ -1,25 +1,30 @@
 /* ====================================================
-   CSS CHO FORM THÊM TOUR (ADMIN)
-   ==================================================== */
+   ADD TOUR - GLASSMORPHISM & ANTIGRAVITY
+==================================================== */
 
 .add-tour-container {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
 }
 
 .add-tour-form {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Các Tiêu đề Mục (1. Thông tin cơ bản, 2. Lịch trình...) */
+/* Các Tiêu đề Mục */
 .section-title {
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-top: 30px;
-    color: #2c3e50;
+    border-bottom: 2px solid rgba(45, 66, 113, 0.1);
+    padding-bottom: 12px;
+    margin-top: 40px;
+    color: #2d4271;
+    font-weight: 800;
+    font-size: 1.5rem;
 }
 
 .section-title:first-child {
@@ -30,21 +35,21 @@
 .form-grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 20px;
+    margin-bottom: 25px;
 }
 
 .form-grid-3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 10px;
+    gap: 15px;
+    margin-bottom: 15px;
 }
 
 .form-grid-4 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 10px;
+    gap: 15px;
 }
 
 /* Label & Input chuẩn */
@@ -55,123 +60,145 @@
 
 .form-group label, 
 .form-group small {
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #34495e;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #2d4271;
 }
 
 .form-input {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 30px;
     box-sizing: border-box;
-    transition: border-color 0.2s;
+    transition: all 0.3s ease;
     font-family: inherit;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .form-input:focus {
     border-color: #3498db;
+    background: rgba(255, 255, 255, 0.95);
     outline: none;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15), inset 0 2px 5px rgba(0,0,0,0.01);
 }
 
 textarea.form-input {
-    min-height: 80px;
+    min-height: 100px;
     resize: vertical;
 }
 
 .duration-group {
     display: flex;
-    gap: 10px;
+    gap: 15px;
 }
 
 /* Grid Checkbox Tiện ích */
 .amenities-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(0,0,0,0.05);
 }
 
 .amenity-checkbox {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #34495e;
 }
 
 .amenity-checkbox input {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
+    accent-color: #e31837;
 }
 
 /* Khối Lịch trình & Đợt khởi hành */
 .dynamic-block {
-    background: #f8f9fa;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.35);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.dynamic-block:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .departure-block {
-    border-left: 4px solid #3498db;
+    border-left: 5px solid #3498db;
 }
 
 .block-header {
     display: block;
-    margin-bottom: 10px;
-    color: #2c3e50;
+    margin-bottom: 15px;
+    color: #2d4271;
+    font-weight: 800;
+    font-size: 1.1rem;
 }
 
 /* Nút bấm (Buttons) */
 .btn-add-item {
-    padding: 8px 15px;
-    margin-bottom: 20px;
+    padding: 10px 20px;
+    margin-bottom: 25px;
     cursor: pointer;
-    background: #ecf0f1;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-weight: 600;
-    color: #2c3e50;
-    transition: all 0.2s;
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+    border: 1px solid rgba(52, 152, 219, 0.2);
+    border-radius: 10px;
+    font-weight: 800;
+    transition: all 0.3s ease;
 }
 
 .btn-add-item:hover {
-    background: #bdc3c7;
+    background: rgba(52, 152, 219, 0.2);
+    transform: translateY(-2px);
 }
 
 .btn-submit-tour {
     width: 100%;
-    padding: 15px;
-    background: #e74c3c;
+    padding: 16px;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s;
+    margin-top: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(227, 24, 55, 0.3);
 }
 
 .btn-submit-tour:hover:not(:disabled) {
-    background: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(227, 24, 55, 0.4);
 }
 
 .btn-submit-tour:disabled {
-    background: #95a5a6;
+    background: #bdc3c7;
+    box-shadow: none;
     cursor: not-allowed;
+    transform: none;
 }
 
 .divider {
     border: 0;
-    border-top: 1px solid #eee;
-    margin: 20px 0;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+    margin: 25px 0;
 }
 
 /* ====================================================
@@ -179,71 +206,74 @@ textarea.form-input {
    ==================================================== */
 
 .current-image-preview {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border: 1px dashed #ccc;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    border: 2px dashed rgba(0,0,0,0.1);
 }
 
 .current-image-preview img {
-    height: 120px;
-    border-radius: 8px;
+    height: 150px;
+    border-radius: 30px;
     object-fit: cover;
-    margin: 10px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .btn-remove-item {
     color: #e74c3c;
     border: none;
-    background: none;
+    background: rgba(231, 76, 60, 0.1);
     cursor: pointer;
-    font-weight: bold;
-    padding: 5px;
-    transition: color 0.2s;
+    font-weight: 800;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 .btn-remove-item:hover {
-    color: #c0392b;
-    text-decoration: underline;
+    background: rgba(231, 76, 60, 0.2);
 }
 
 .departure-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* Nút Submit riêng cho Edit Tour (Màu xanh lam thay vì đỏ) */
+/* Nút Submit riêng cho Edit Tour */
 .btn-update-tour {
     width: 100%;
-    padding: 15px;
-    background: #2980b9;
+    padding: 16px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 30px;
     font-size: 1.2rem;
-    font-weight: bold;
+    font-weight: 800;
     cursor: pointer;
-    margin-top: 20px;
-    transition: background 0.3s;
+    margin-top: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
 }
 
 .btn-update-tour:hover:not(:disabled) {
-    background: #1f618d;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
 }
 
 .btn-update-tour:disabled {
-    background: #95a5a6;
+    background: #bdc3c7;
+    box-shadow: none;
     cursor: not-allowed;
+    transform: none;
 }
 
-/* Căn chỉnh Input Tiêu đề Lịch trình để chừa chỗ cho Nút Xóa */
 .itinerary-day-input {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }

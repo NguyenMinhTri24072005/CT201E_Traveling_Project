@@ -1,61 +1,68 @@
-/* ==================================================
-   BỐ CỤC TỔNG THỂ (LAYOUT)
-================================================== */
+/* ====================================================
+   TOUR LIST - GLASSMORPHISM & ANTIGRAVITY
+==================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 .tour-list-page {
-    background-color: #f4f7f6;
+    background: linear-gradient(135deg, #f4f7f6 0%, #e8edf1 100%);
     min-height: 100vh;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Banner Hero */
+/* Banner Hero - Glass */
 .tour-header-banner {
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, rgba(30, 60, 114, 0.85) 0%, rgba(42, 82, 152, 0.85) 100%);
+    backdrop-filter: blur(40px) saturate(180%);
     color: white;
     text-align: center;
-    padding: 60px 20px;
-    margin-bottom: 40px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 70px 20px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
 }
 
 .tour-header-banner h1 {
-    margin: 0 0 10px 0;
-    font-size: 2.8rem;
+    margin: 0 0 15px 0;
+    font-size: 3rem;
     font-weight: 800;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .tour-header-banner p {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     opacity: 0.9;
+    font-weight: 500;
 }
 
-/* Container chính chia 2 cột - SỬ DỤNG CSS GRID CHỐNG LỖI */
 .tour-list-container {
-    max-width: 1250px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 30px;
-    align-items: start; /* Quan trọng để Sidebar sticky hoạt động */
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: start;
 }
 
-/* ==================================================
-   THANH BÊN (SIDEBAR BỘ LỌC)
-================================================== */
+/* ================= THANH BÊN (SIDEBAR BỘ LỌC) ================= */
 .tour-sidebar {
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-    /* Hiệu ứng trượt dọc (Sticky) */
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
     position: sticky;
-    top: 90px; 
+    top: 100px;
 }
 
 .filter-group {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .filter-group:last-child {
@@ -63,50 +70,50 @@
 }
 
 .filter-group h3 {
-    font-size: 1.1rem;
-    color: #2c3e50;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #f0f2f5;
+    font-size: 1.15rem;
+    color: #2d4271;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(45, 66, 113, 0.1);
     font-weight: 700;
     margin-top: 0;
 }
 
-/* Input & Select */
 .search-input, .filter-select {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #dcdde1;
-    border-radius: 8px;
-    font-size: 0.95rem;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(200, 200, 200, 0.4);
+    border-radius: 30px;
+    font-size: 1rem;
     color: #2c3e50;
     transition: all 0.3s ease;
     box-sizing: border-box;
-    background-color: #fdfdfd;
     font-family: inherit;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
 }
 
 .search-input:focus, .filter-select:focus {
     border-color: #3498db;
+    background: rgba(255, 255, 255, 0.95);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
-    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15), inset 0 2px 5px rgba(0,0,0,0.01);
 }
 
-/* Radio Buttons cho Mức giá */
 .radio-group {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
 }
 
 .radio-group label {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     cursor: pointer;
-    color: #34495e;
-    font-size: 0.95rem;
+    color: #4a5568;
+    font-size: 1rem;
+    font-weight: 500;
     transition: color 0.2s ease;
 }
 
@@ -116,18 +123,21 @@
 
 .radio-group input[type="radio"] {
     appearance: none;
-    width: 18px;
-    height: 18px;
-    border: 2px solid #bdc3c7;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.5);
     border-radius: 50%;
     cursor: pointer;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     margin: 0;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .radio-group input[type="radio"]:checked {
     border-color: #e31837;
+    background: white;
 }
 
 .radio-group input[type="radio"]:checked::after {
@@ -136,129 +146,129 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background-color: #e31837;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     border-radius: 50%;
 }
 
-/* ==================================================
-   KHU VỰC LƯỚI TOUR (TOUR GRID SECTION)
-================================================== */
+/* ================= KHU VỰC LƯỚI TOUR ================= */
 .tour-grid-section {
-    min-width: 0; /* Ngăn chặn lưới vượt khỏi container */
+    min-width: 0;
 }
 
 .tour-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-/* ==================================================
-   TRẠNG THÁI LOADING & KHÔNG TÌM THẤY (EMPTY STATE)
-================================================== */
+/* ================= TRẠNG THÁI LOADING & EMPTY ================= */
 .loading-spinner, .no-tour-found {
     text-align: center;
-    padding: 80px 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    padding: 100px 20px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .loading-spinner {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #3498db;
     font-weight: bold;
     animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+    0% { opacity: 0.6; transform: scale(0.98); }
+    50% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.6; transform: scale(0.98); }
 }
 
 .no-tour-found h3 {
     color: #2c3e50;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
     margin-top: 0;
+    font-weight: 800;
 }
 
 .no-tour-found p {
     color: #7f8c8d;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
 }
 
 .btn-reset {
-    background: #e31837;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     color: white;
     border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 14px 30px;
+    border-radius: 30px;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(227, 24, 55, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(227, 24, 55, 0.3);
 }
 
 .btn-reset:hover {
-    background: #c0392b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(227, 24, 55, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(227, 24, 55, 0.4);
 }
 
-/* ==================================================
-   THANH PHÂN TRANG (PAGINATION)
-================================================== */
+/* ================= THANH PHÂN TRANG (PAGINATION) ================= */
 .pagination {
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 40px;
+    gap: 10px;
+    margin-top: 50px;
 }
 
 .pagination button {
-    padding: 8px 16px;
-    border: 1px solid #dcdde1;
-    background: #ffffff;
+    padding: 10px 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(40px) saturate(180%);
     color: #2c3e50;
-    border-radius: 6px;
+    border-radius: 10px;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
 }
 
 .pagination button:hover:not(:disabled) {
-    background: #f1f2f6;
-    border-color: #bdc3c7;
+    background: white;
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(52, 152, 219, 0.15);
 }
 
 .pagination button.active {
-    background: #e31837;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     color: white;
-    border-color: #e31837;
+    border-color: transparent;
+    box-shadow: 0 8px 15px rgba(227, 24, 55, 0.3);
 }
 
 .pagination button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: #f9f9f9;
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* ==================================================
-   RESPONSIVE (THÍCH ỨNG MOBILE & TABLET)
-================================================== */
+/* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
     .tour-list-container {
-        grid-template-columns: 1fr; /* Gập về 1 cột trên Mobile/Tablet */
+        grid-template-columns: 1fr;
     }
     
     .tour-sidebar {
-        position: static; /* Tắt sticky trên mobile để vuốt tự nhiên */
-        margin-bottom: 20px;
+        position: static;
+        margin-bottom: 30px;
     }
 }

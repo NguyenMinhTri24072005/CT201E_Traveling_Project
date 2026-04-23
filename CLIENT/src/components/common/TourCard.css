@@ -1,18 +1,26 @@
-.tour-card {
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.3s ease;
-    display: flex;
-    border: 1px solid #f0f0f0;
+/* ====================================================
+   TOUR CARD - GLASSMORPHISM & ANTIGRAVITY
+==================================================== */
 
+.tour-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0,0,0,0.02);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
     text-decoration: none;
     color: inherit;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 .tour-card:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12), 0 5px 15px rgba(0,0,0,0.05);
+    border-color: rgba(255, 255, 255, 0.9);
 }
 
 .tour-card.vertical {
@@ -21,7 +29,7 @@
 
 .tour-card.vertical .tour-image-container {
     width: 100%;
-    height: 200px;
+    height: 220px;
     position: relative;
     overflow: hidden;
 }
@@ -30,28 +38,29 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tour-card:hover .tour-image {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .tour-badge {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #e31837;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     color: white;
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
     z-index: 2;
+    box-shadow: 0 4px 10px rgba(227, 24, 55, 0.3);
 }
 
 .tour-content {
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -60,22 +69,23 @@
 .tour-meta {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: #7f8c8d;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-weight: 500;
 }
 
 .tour-meta span {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
 }
 
 .tour-name {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #2c3e50;
     margin: 0 0 15px 0;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -84,35 +94,35 @@
     flex: 1;
 }
 
-
 .tour-rating {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-bottom: 10px;
-    font-size: 13.5px;
+    margin-bottom: 15px;
+    font-size: 14px;
 }
 
 .tour-rating-star {
     color: #f39c12;
     font-weight: 900;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 .tour-rating-number {
-    font-weight: bold;
+    font-weight: 800;
     color: #2c3e50;
 }
 
 .tour-rating-count {
     color: #7f8c8d;
+    font-weight: 500;
 }
 
 .tour-price-box {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    border-top: 1px dashed #ddd;
+    border-top: 1px solid rgba(0,0,0,0.08);
     padding-top: 15px;
 }
 
@@ -124,27 +134,31 @@
 .original-price {
     text-decoration: line-through;
     color: #95a5a6;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .sale-price {
     color: #e31837;
-    font-size: 1.3rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 900;
 }
 
 .btn-book {
-    background: white;
+    background: rgba(255, 255, 255, 0.5);
     color: #e31837;
-    border: 1px solid #e31837;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-weight: 600;
+    border: 2px solid #e31837;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(40px) saturate(180%);
 }
 
 .btn-book:hover {
     background: #e31837;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(227, 24, 55, 0.3);
 }

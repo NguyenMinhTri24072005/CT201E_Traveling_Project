@@ -1,26 +1,32 @@
 /* ====================================================
-   CSS CHO QUẢN LÝ ĐƠN HÀNG (ADMIN)
-   ==================================================== */
+   ADMIN BOOKING MANAGEMENT
+==================================================== */
 
 .admin-loading-text {
-    padding: 20px;
+    padding: 30px;
     color: #2d4271;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
 }
 
 .admin-header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 /* Kế thừa từ filter-label nhưng có màu nhấn riêng cho Admin */
 .filter-label.partner-highlight {
     color: #e31837;
+    font-weight: 800;
 }
 
 /* Kế thừa từ filter-input nhưng nổi bật hơn */
 .filter-input.partner-highlight {
     color: #e31837;
-    font-weight: bold;
+    font-weight: 800;
+    background: rgba(227, 24, 55, 0.05);
+    border-color: rgba(227, 24, 55, 0.2);
 }

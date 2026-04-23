@@ -1,63 +1,76 @@
 /* ====================================================
-   CSS CHO THIẾT LẬP GIAN HÀNG PARTNER
-   ==================================================== */
+   SHOP SETTINGS - GLASSMORPHISM & ANTIGRAVITY
+==================================================== */
 
 .shop-settings-container {
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
 }
 
 .shop-settings-subtitle {
     color: #7f8c8d;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
 .shop-settings-form {
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .shop-form-group {
-    margin-bottom: 20px;
-}
-
-.shop-form-group:last-of-type {
     margin-bottom: 25px;
 }
 
+.shop-form-group:last-of-type {
+    margin-bottom: 30px;
+}
+
 .shop-form-label {
-    font-weight: bold;
+    font-weight: 800;
     display: block;
-    margin-bottom: 10px;
-    color: #2c3e50;
+    margin-bottom: 12px;
+    color: #2d4271;
+    font-size: 1rem;
 }
 
 /* --- Khung tải Ảnh bìa (Cover Image) --- */
 .cover-upload-box {
     width: 100%;
-    height: 200px;
-    border-radius: 10px;
-    background-color: #f1f2f6;
+    height: 250px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.5);
     background-size: cover;
     background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px dashed #bdc3c7;
+    border: 2px dashed rgba(45, 66, 113, 0.3);
     cursor: pointer;
     position: relative;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 5px 15px rgba(0,0,0,0.02);
 }
 
 .cover-upload-box:hover {
     border-color: #3498db;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .cover-upload-placeholder {
-    color: #7f8c8d;
-    font-weight: 500;
+    color: #2d4271;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(40px) saturate(180%);
 }
 
 .cover-upload-input {
@@ -71,22 +84,26 @@
 /* --- Nút Lưu --- */
 .btn-save-shop {
     width: 100%;
-    padding: 15px;
-    background: #e31837;
+    padding: 16px;
+    background: linear-gradient(135deg, #e31837, #c0392b);
     color: white;
     border: none;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1.1rem;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 1.15rem;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 20px rgba(227, 24, 55, 0.3);
 }
 
 .btn-save-shop:hover:not(:disabled) {
-    background: #c0392b;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(227, 24, 55, 0.4);
 }
 
 .btn-save-shop:disabled {
-    background: #95a5a6;
+    background: #bdc3c7;
+    box-shadow: none;
     cursor: not-allowed;
+    transform: none;
 }
