@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 30px;
-    font-family: inherit;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     
     /* Liquid Glass Effect (iOS 26 Style) */
     background: rgba(255, 255, 255, 0.35);
@@ -126,15 +126,29 @@
 }
 
 .register-btn {
-    background: linear-gradient(135deg, #2d4271, #1a2a4f);
-    color: white;
-    border: none;
-    box-shadow: 0 8px 20px rgba(45, 66, 113, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background:  #2d4271;
+    opacity: 0.9;
+    border: 1px solid rgba(45, 66, 113, 0.3);
+    color: #ffffff;
+    border-radius: 30px; 
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
 }
 
 .register-btn:hover {
-    background: linear-gradient(135deg, #1a2a4f, #0d162a);
-    box-shadow: 0 12px 30px rgba(45, 66, 113, 0.4);
+    background: #ffffff;
+    color: #2d4271;
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(45, 66, 113, 0.3);
+    border-color: #2d4271;
 }
 
 /* =======================================

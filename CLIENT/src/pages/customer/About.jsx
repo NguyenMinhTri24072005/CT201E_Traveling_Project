@@ -28,7 +28,7 @@ export default function About() {
                     </div>
                     <div className="story-image">
                         <img 
-                            src="https://images.unsplash.com/photo-1559592413-7ce470ea398f?q=80&w=1000&auto=format&fit=crop" 
+                            src="../../../../public/r6.jpg" 
                             alt="Ruộng bậc thang" 
                         />
                     </div>

@@ -7,8 +7,8 @@ const groqClient = new OpenAI({
     baseURL: "https://api.groq.com/openai/v1",
 });
 
-const systemInstruction = `Bạn là "Mây", nữ nhân viên tư vấn du lịch siêu đáng yêu của Tây Bắc Travel.
-
+const systemInstruction = `
+Bạn là "Mây", nữ nhân viên tư vấn du lịch siêu đáng yêu của Tây Bắc Travel.
 ====================
 PERSONA
 ====================
@@ -48,13 +48,15 @@ const tools = [
         type: "function",
         function: {
             name: "find_tours",
-            description: "Tìm kiếm tour du lịch trong cơ sở dữ liệu.",
+            description: "Tìm kiếm tour du lịch trong cơ sở dữ liệu dựa trên địa điểm, sở thích, điểm khởi hành, số ngày hoặc ngân sách.",
             parameters: {
                 type: "object",
                 properties: {
                     destination: { type: "string", description: "Điểm đến (VD: Sapa, Hà Giang)" },
                     keyword: { type: "string", description: "Từ khóa sở thích (VD: lãng mạn, gia đình)" },
-                    maxPrice: { type: "string", description: "Mức giá tối đa (VD: 3000000)" }
+                    departureLocation: { type: "string", description: "Điểm khởi hành (VD: Cần Thơ, Hà Nội)" },
+                    duration: { type: "number", description: "Số ngày đi tour (VD: đi 3 ngày 2 đêm thì nhập 3)" },
+                    maxPrice: { type: "number", description: "Mức giá tối đa bằng số (VD: 3000000)" }
                 }
             }
         }
@@ -62,8 +64,22 @@ const tools = [
     {
         type: "function",
         function: {
+            name: "get_tour_details",
+            description: "Xem chi tiết một tour bao gồm lịch trình, chính sách hoàn hủy và dịch vụ bao gồm/loại trừ. Thay thế cho get_tour_itinerary.",
+            parameters: {
+                type: "object",
+                properties: {
+                    tourName: { type: "string", description: "Tên tour cần xem chi tiết" }
+                },
+                required: ["tourName"]
+            }
+        }
+    },
+    {
+        type: "function",
+        function: {
             name: "check_availability",
-            description: "Kiểm tra vé, chỗ trống của tour.",
+            description: "Kiểm tra vé, chỗ trống của tour trong một ngày cụ thể.",
             parameters: {
                 type: "object",
                 properties: {
@@ -82,25 +98,50 @@ const tools = [
             parameters: {
                 type: "object",
                 properties: {
-                    tourName: { type: "string" },
-                    adultCount: { type: "string" },
-                    childCount: { type: "string" }
+                    tourName: { type: "string", description: "Tên tour khách muốn tính giá" },
+                    adultCount: { type: "number", description: "Số lượng người lớn (VD: 2)" },
+                    childCount: { type: "number", description: "Số lượng trẻ em (VD: 1)" }
                 },
-                required: ["tourName"]
+                required: ["tourName", "adultCount"]
             }
         }
     },
     {
         type: "function",
         function: {
-            name: "get_tour_itinerary",
-            description: "Xem lịch trình chi tiết của tour.",
+            name: "request_booking",
+            description: "Tạo yêu cầu đặt tour (booking nháp) vào hệ thống. LƯU Ý: Phải hỏi và thu thập đủ thông tin người đại diện (Tên, SĐT, Email, CCCD) trước khi gọi hàm này.",
             parameters: {
                 type: "object",
                 properties: {
-                    tourName: { type: "string" }
+                    tourName: { type: "string", description: "Tên tour khách muốn đặt" },
+                    departureDate: { type: "string", description: "Ngày khởi hành mong muốn (VD: 25/12/2026)" },
+                    adultCount: { type: "number", description: "Số lượng người lớn" },
+                    childCount: { type: "number", description: "Số lượng trẻ em (nếu không có thì để 0)" },
+                    fullName: { type: "string", description: "Họ và tên người đại diện đặt tour" },
+                    phone: { type: "string", description: "Số điện thoại liên hệ" },
+                    email: { type: "string", description: "Email của người đại diện" },
+                    cccd: { type: "string", description: "Số Căn cước công dân (CCCD) của người đại diện" },
+                    notes: { type: "string", description: "Ghi chú thêm của khách (Ví dụ: ăn chay, say xe). Bỏ qua nếu không có." }
                 },
-                required: ["tourName"]
+                required: [
+                    "tourName", "departureDate", "adultCount", 
+                    "fullName", "phone", "email", "cccd"
+                ]
+            }
+        }
+    },
+    {
+        type: "function",
+        function: {
+            name: "get_faq_info",
+            description: "Truy vấn các câu hỏi thường gặp về công ty (VD: địa chỉ ở đâu, độ uy tín, chính sách bảo hiểm, quy định chung).",
+            parameters: {
+                type: "object",
+                properties: {
+                    question: { type: "string", description: "Câu hỏi của khách (VD: Công ty có bảo hiểm du lịch không?)" }
+                },
+                required: ["question"]
             }
         }
     }
@@ -108,74 +149,92 @@ const tools = [
 
 const aiAgentService = {
     processUserMessage: async (userMessage, chatHistory = []) => {
-        
-        const messages = [
-            { role: "system", content: systemInstruction },
-            ...chatHistory, 
-            { role: "user", content: userMessage }
-        ];
+        try {
+            const messages = [
+                { role: "system", content: systemInstruction },
+                ...chatHistory,
+                { role: "user", content: userMessage }
+            ];
 
-        const response = await groqClient.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
-            messages: messages, 
-            tools: tools,
-            tool_choice: "auto",
-            parallel_tool_calls: false,
-        });
-
-        const responseMessage = response.choices[0].message;
-
-        if (responseMessage.tool_calls) {
-            const toolCall = responseMessage.tool_calls[0];
-            const toolName = toolCall.function.name;
-            
-            // Xử lý an toàn khi parse arguments
-            let args = {};
-            try {
-                args = JSON.parse(toolCall.function.arguments);
-            } catch (e) {
-                console.error("Lỗi parse arguments của Tool:", e);
-            }
-
-            let toolData = null;
-
-            if (toolName === "find_tours") {
-                toolData = await aiTools.executeFindTours(args);
-            }
-            else if (toolName === "check_availability") {
-                toolData = await aiTools.executeCheckAvailability(args);
-            }
-            else if (toolName === "calculate_total_price") {
-                toolData = await aiTools.executeCalculatePrice(args);
-            }
-            else if (toolName === "get_tour_itinerary") {
-                toolData = await aiTools.executeGetItinerary(args);
-            }
-
-            messages.push(responseMessage);
-            messages.push({
-                role: "tool",
-                tool_call_id: toolCall.id,
-                name: toolCall.function.name,
-                content: JSON.stringify(toolData)
-            });
-
-            const finalResponse = await groqClient.chat.completions.create({
+            const response = await groqClient.chat.completions.create({
                 model: "llama-3.3-70b-versatile",
-                messages: messages, 
+                messages: messages,
+                tools: tools,
+                tool_choice: "auto",
+                parallel_tool_calls: false,
             });
 
-            return {
-                reply: finalResponse.choices[0].message.content,
-                thinkingType: "slow Thinking"
-            };
-        }
+            const responseMessage = response.choices[0].message;
 
-        else {
-            console.log("fast thinking");
+            if (responseMessage.tool_calls) {
+                const toolCall = responseMessage.tool_calls[0];
+                const toolName = toolCall.function.name;
+
+                // Xử lý an toàn khi parse arguments
+                let args = {};
+                try {
+                    args = JSON.parse(toolCall.function.arguments);
+                } catch (e) {
+                    console.error("[AI ERROR] Lỗi parse arguments của Tool:", e);
+                }
+
+                let toolData = null;
+
+                // BỔ SUNG ÁNH XẠ ĐẦY ĐỦ 6 TOOLS
+                if (toolName === "find_tours") {
+                    toolData = await aiTools.executeFindTours(args);
+                }
+                else if (toolName === "get_tour_details") { // Thay thế cho get_tour_itinerary cũ
+                    toolData = await aiTools.executeGetTourDetails(args);
+                }
+                else if (toolName === "check_availability") {
+                    toolData = await aiTools.executeCheckAvailability(args);
+                }
+                else if (toolName === "calculate_total_price") {
+                    toolData = await aiTools.executeCalculatePrice(args);
+                }
+                else if (toolName === "request_booking") { // Tool mới: Đặt tour
+                    toolData = await aiTools.executeRequestBooking(args);
+                }
+                else if (toolName === "get_faq_info") { // Tool mới: Thông tin công ty
+                    toolData = await aiTools.executeGetFaqInfo(args);
+                }
+                else {
+                    console.warn(`[WARNING] AI gọi công cụ không tồn tại: ${toolName}`);
+                    toolData = { error: `Công cụ ${toolName} không được hệ thống hỗ trợ.` };
+                }
+
+                messages.push(responseMessage);
+                messages.push({
+                    role: "tool",
+                    tool_call_id: toolCall.id,
+                    name: toolCall.function.name,
+                    content: JSON.stringify(toolData)
+                });
+
+                const finalResponse = await groqClient.chat.completions.create({
+                    model: "llama-3.3-70b-versatile",
+                    messages: messages,
+                });
+
+                return {
+                    reply: finalResponse.choices[0].message.content,
+                    thinkingType: "slow Thinking"
+                };
+            }
+
+            else {
+                console.log("[AI] fast thinking");
+                return {
+                    reply: responseMessage.content,
+                    thinkingType: "fast Thinking"
+                };
+            }
+        } catch (error) {
+            console.error("[AI SERVICE ERROR] Lỗi trong quá trình xử lý tin nhắn:", error);
             return {
-                reply: responseMessage.content,
-                thinkingType: "fast Thinking"
+                reply: "Dạ hệ thống của em đang gặp chút gián đoạn, anh/chị chờ em một lát rồi nhắn lại nhé! 🌸",
+                thinkingType: "error"
             };
         }
     }
