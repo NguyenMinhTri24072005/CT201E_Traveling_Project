@@ -1,81 +1,83 @@
 // SERVER/src/services/aiTools.js
 const Tour = require('../models/Tours');
-const Booking = require('../models/Booking'); // Đảm bảo đường dẫn này đúng với project của bạn
+const Booking = require('../models/Booking');
 const { semanticSearchLocal } = require('./rag/retrievalService');
 
+// ==========================================
+// 🛠️ HELPER FUNCTIONS (Hàm hỗ trợ dùng chung)
+// ==========================================
+
+// 1. Hàm chống lỗi Regex (Bảo vệ Database khỏi Crash)
+const escapeRegex = (text) => {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+// 2. Hàm tìm Tour theo tên (Dùng chung cho cả 4 tools bên dưới)
+const findTourByNameHelper = async (tourName, includeLocation = false) => {
+    if (!tourName) return null;
+    
+    // Tách từ khóa và escape an toàn, hỗ trợ tìm kiếm mờ (Fuzzy Search)
+    const safeRegexStr = tourName.trim().split(/\s+/).map(escapeRegex).join('.*');
+    
+    const query = { status: 'Approved' };
+    const orConditions = [{ name: { $regex: safeRegexStr, $options: 'i' } }];
+    
+    if (includeLocation) {
+        orConditions.push({ departureLocation: { $regex: safeRegexStr, $options: 'i' } });
+    }
+    
+    query.$or = orConditions;
+    
+    // Trả về tour đầu tiên khớp nhất
+    return await Tour.findOne(query).lean();
+};
+
+// ==========================================
+// 🚀 MAIN AI TOOLS
+// ==========================================
+
 const aiTools = {
-    // 1. TÌM KIẾM TOUR (Đã bổ sung departureLocation, duration)
+    // 1. TÌM KIẾM TOUR (Đã đẩy Filter xuống cho RAG xử lý để nhẹ RAM)
     executeFindTours: async (args) => {
         try {
-            console.log("[TOOL EXECUTION] Đang chạy 'find_tours' VỚI RAG:", args);
+            console.log("[TOOL EXECUTION] Đang chạy 'find_tours':", args);
             const { destination, keyword, departureLocation, duration, maxPrice } = args || {};
             
-            // Gộp các từ khóa thành 1 câu truy vấn để RAG hiểu ngữ nghĩa
-            const searchQuery = `${destination || ''} ${keyword || ''} ${departureLocation || ''}`.trim();
-            let tours = [];
+            const searchQuery = `${destination || ''} ${keyword || ''}`.trim();
+            
+            // Đóng gói các điều kiện cứng
+            const filters = {
+                maxPrice: maxPrice,
+                departureLocation: departureLocation,
+                duration: duration
+            };
 
-            if (searchQuery) {
-                tours = await semanticSearchLocal(searchQuery);
-            } else {
-                tours = await Tour.find({ status: 'Approved' }).limit(3).lean();
-            }
+            // Gọi thẳng Hybrid Search (MongoDB lọc cứng + Vector chấm điểm)
+            let tours = await semanticSearchLocal(searchQuery, filters, 3);
 
-            // Lọc theo Max Price
-            if (maxPrice && tours.length > 0) {
-                const parsedPrice = parseInt(maxPrice, 10);
-                if (!isNaN(parsedPrice) && parsedPrice > 0) {
-                    tours = tours.filter(t => 
-                        t.departures && t.departures.some(d => d.adultPrice <= parsedPrice)
-                    );
-                }
-            }
-
-            // Lọc theo Nơi khởi hành
-            if (departureLocation && tours.length > 0) {
-                tours = tours.filter(t => 
-                    t.departureLocation && t.departureLocation.toLowerCase().includes(departureLocation.toLowerCase())
-                );
-            }
-
-            // Lọc theo Số ngày (duration)
-            if (duration && tours.length > 0) {
-                const parsedDuration = parseInt(duration, 10);
-                if (!isNaN(parsedDuration)) {
-                    tours = tours.filter(t => 
-                        t.duration && t.duration.toString().includes(parsedDuration.toString())
-                    );
-                }
-            }
-
+            // Fallback nếu không có kết quả
             if (tours.length === 0) {
-                console.log("[TOOL] Không tìm thấy, kích hoạt Fallback lấy 3 tour ngẫu nhiên...");
-                tours = await Tour.find({ status: 'Approved' }).limit(3).lean();
+                console.log("[TOOL] Không có tour khớp 100%, Fallback ngẫu nhiên...");
+                tours = await Tour.find({ status: 'Approved' })
+                    .select('-embeddingVector') // Loại bỏ vector cho nhẹ
+                    .limit(3)
+                    .lean();
             }
 
             return tours;
         } catch (error) {
-            console.error("[TOOL ERROR] Lỗi khi chạy find_tours:", error);
+            console.error("[TOOL ERROR] Lỗi find_tours:", error);
             return []; 
         }
     },
 
-    // 2. XEM CHI TIẾT TOUR (Thay cho Itinerary, lấy full thông tin)
+    // 2. XEM CHI TIẾT TOUR
     executeGetTourDetails: async (args) => {
         try {
-            console.log("[TOOL EXECUTION] Đang chạy 'get_tour_details' với tham số:", args);
-            const { tourName } = args || {};
+            console.log("[TOOL EXECUTION] Đang chạy 'get_tour_details':", args);
+            const tour = await findTourByNameHelper(args.tourName);
 
-            if (!tourName) return { error: "Vui lòng cung cấp tên tour để xem chi tiết." };
-
-            const searchRegex = tourName.trim().split(' ').join('.*');
-            const tour = await Tour.findOne({
-                status: 'Approved',
-                $or: [
-                    { name: { $regex: searchRegex, $options: 'i' } }
-                ]
-            }).select('name itinerary duration inclusions exclusions refundPolicy').lean();
-
-            if (!tour) return { error: `Không tìm thấy chi tiết cho tour '${tourName}'.` };
+            if (!tour) return { error: `Dạ em không tìm thấy tour nào tên '${args.tourName}'.` };
 
             return {
                 tourName: tour.name,
@@ -83,34 +85,24 @@ const aiTools = {
                 itinerary: tour.itinerary,
                 inclusions: tour.inclusions || "Đang cập nhật",
                 exclusions: tour.exclusions || "Đang cập nhật",
-                refundPolicy: tour.refundPolicy || "Vui lòng liên hệ hotline để biết chính sách hoàn hủy."
+                refundPolicy: tour.refundPolicy || "Vui lòng liên hệ hotline."
             };
         } catch (error) {
-            console.error("[TOOL ERROR] Lỗi khi tra cứu chi tiết tour:", error);
-            return { error: "Hệ thống đang gặp sự cố khi lấy chi tiết tour." };
+            console.error("[TOOL ERROR] Lỗi get_tour_details:", error);
+            return { error: "Hệ thống đang bận, không lấy được chi tiết." };
         }
     },
 
-    // 3. KIỂM TRA CHỖ TRỐNG (Giữ nguyên logic cực tốt của bạn)
+    // 3. KIỂM TRA CHỖ TRỐNG
     executeCheckAvailability: async (args) => {
         try {
-            console.log("[TOOL EXECUTION] Đang chạy 'check_availability' với tham số:", args);
+            console.log("[TOOL EXECUTION] Đang chạy 'check_availability':", args);
             const { tourName, date } = args || {};
             
-            if (!tourName) return { error: "Vui lòng cung cấp tên địa điểm hoặc tên tour để kiểm tra chỗ trống." };
+            // Hàm helper có hỗ trợ tìm thêm theo departureLocation
+            const tour = await findTourByNameHelper(tourName, true);
 
-            const searchRegex = tourName.trim().split(' ').join('.*');
-            const tours = await Tour.find({
-                status: 'Approved',
-                $or: [
-                    { name: { $regex: searchRegex, $options: 'i' } },
-                    { departureLocation: { $regex: searchRegex, $options: 'i' } }
-                ]
-            }).lean();
-
-            if (tours.length === 0) return { error: `Không tìm thấy tour nào liên quan đến '${tourName}'.` };
-
-            const tour = tours[0];
+            if (!tour) return { error: `Không tìm thấy tour liên quan đến '${tourName}'.` };
 
             if (date) {
                 const exactDeparture = tour.departures.find(d => 
@@ -127,7 +119,7 @@ const aiTools = {
                     };
                 } else {
                     return { 
-                        error: `Tour '${tour.name}' không có lịch khởi hành vào ngày ${date}.`,
+                        error: `Tour '${tour.name}' không có lịch khởi hành ngày ${date}.`,
                         suggestedDates: tour.departures.map(d => d.date).slice(0, 3) 
                     };
                 }
@@ -142,30 +134,24 @@ const aiTools = {
                 };
             }
         } catch (error) {
-            console.error("[TOOL ERROR] Lỗi khi chạy check_availability:", error);
+            console.error("[TOOL ERROR] Lỗi check_availability:", error);
             return { error: "Lỗi hệ thống khi kiểm tra vé." };
         }
     },
 
-    // 4. TÍNH TỔNG TIỀN (Giữ nguyên)
+    // 4. TÍNH TỔNG TIỀN
     executeCalculatePrice: async (args) => {
         try {
-            console.log("[TOOL EXECUTION] Đang chạy 'calculate_total_price' với tham số:", args);
-            const { tourName, adultCount = 0, childCount = 0 } = args;
-            const searchRegex = tourName.trim().split(' ').join('.*');
-            const tours = await Tour.find({
-                status: 'Approved',
-                name: { $regex: searchRegex, $options: 'i' }
-            }).lean();
+            console.log("[TOOL EXECUTION] Đang chạy 'calculate_total_price':", args);
+            const tour = await findTourByNameHelper(args.tourName);
 
-            if (tours.length === 0) return { error: `Không tìm thấy tour '${tourName}'.` };
+            if (!tour) return { error: `Không tìm thấy tour '${args.tourName}'.` };
 
-            const tour = tours[0];
             const departure = tour.departures[0]; 
-            if (!departure || !departure.adultPrice) return { error: "Tour này chưa có bảng giá chi tiết." };
+            if (!departure || !departure.adultPrice) return { error: "Tour chưa có giá chi tiết." };
 
-            const aCount = parseInt(adultCount) || 0;
-            const cCount = parseInt(childCount) || 0;
+            const aCount = parseInt(args.adultCount) || 0;
+            const cCount = parseInt(args.childCount) || 0;
             const adultTotal = aCount * departure.adultPrice;
             const childPrice = departure.childPrice || (departure.adultPrice * 0.75);
             const childTotal = cCount * childPrice;
@@ -180,38 +166,31 @@ const aiTools = {
                 currency: "VNĐ"
             };
         } catch (error) {
-            console.error("[TOOL ERROR] Lỗi tính giá:", error);
+            console.error("[TOOL ERROR] Lỗi calculate_total_price:", error);
             return { error: "Không thể tính giá lúc này." };
         }
     },
 
-    // 5. TẠO YÊU CẦU ĐẶT TOUR (New)
+    // 5. TẠO YÊU CẦU ĐẶT TOUR
     executeRequestBooking: async (args) => {
         try {
-            console.log("[TOOL EXECUTION] Đang chạy 'request_booking' với tham số:", args);
+            console.log("[TOOL EXECUTION] Đang chạy 'request_booking':", args);
             const { tourName, departureDate, adultCount, childCount = 0, fullName, phone, email, cccd, notes } = args;
 
-            // Tìm Tour
-            const searchRegex = tourName.trim().split(' ').join('.*');
-            const tour = await Tour.findOne({ name: { $regex: searchRegex, $options: 'i' }, status: 'Approved' });
+            const tour = await findTourByNameHelper(tourName);
             if (!tour) return { error: `Không tìm thấy tour '${tourName}'.` };
 
-            // Tìm Ngày khởi hành
             const departure = tour.departures.find(d => d.date.includes(departureDate) || departureDate.includes(d.date));
-            if (!departure) return { error: `Tour không có lịch khởi hành vào ngày ${departureDate}.` };
+            if (!departure) return { error: `Tour không có lịch khởi hành ngày ${departureDate}.` };
 
-            // Tính tiền
             const aCount = parseInt(adultCount) || 1;
             const cCount = parseInt(childCount) || 0;
             const totalTickets = aCount + cCount;
             const childPrice = departure.childPrice || (departure.adultPrice * 0.75);
             const totalprice = (aCount * departure.adultPrice) + (cCount * childPrice);
 
-            // TẠO BOOKING NHÁP
-            // Lưu ý: customer (User ID) đang được set mock '000000000000000000000000' để tránh crash Schema do req.user chưa được truyền vào Chatbot. 
-            // Về sau bạn có thể truyền ID thật qua `chatHistory` hoặc bắt buộc User Login trước khi chat.
             const newBooking = new Booking({
-                customer: '000000000000000000000000', // Mock User ID (hoặc bỏ required trong Schema)
+                customer: '000000000000000000000000', 
                 tour: tour._id,
                 departureId: departure._id,
                 totalprice: totalprice,
@@ -225,40 +204,36 @@ const aiTools = {
                 status: 'pending_payment'
             });
 
-            // Nếu bạn tạm thời chưa muốn Save vào DB để tránh rác DB, hãy comment dòng save() lại.
             // await newBooking.save(); 
 
             return {
                 success: true,
-                message: "Đã tạo yêu cầu đặt Tour thành công. Vui lòng hướng dẫn khách kiểm tra Email hoặc truy cập mục 'Đơn hàng' để tiến hành thanh toán trong 24h.",
+                message: "Đã tạo yêu cầu đặt Tour thành công. Vui lòng thanh toán trong 24h.",
                 bookingSummary: {
                     tourName: tour.name,
                     departureDate: departure.date,
                     representative: fullName,
-                    totalPrice: totalprice,
-                    status: "Chờ thanh toán (24h)"
+                    totalPrice: totalprice
                 }
             };
 
         } catch (error) {
-            console.error("[TOOL ERROR] Lỗi khi tạo booking:", error);
-            return { error: "Đã xảy ra lỗi khi tạo đơn hàng. Vui lòng báo khách gọi Hotline để được hỗ trợ trực tiếp." };
+            console.error("[TOOL ERROR] Lỗi request_booking:", error);
+            return { error: "Đã xảy ra lỗi khi tạo đơn hàng." };
         }
     },
 
-    // 6. THÔNG TIN CÔNG TY & FAQ (New)
+    // 6. THÔNG TIN CÔNG TY & FAQ
     executeGetFaqInfo: async (args) => {
         console.log("[TOOL EXECUTION] Đang chạy 'get_faq_info':", args);
-        // Có thể tích hợp RAG FAQ vào đây sau. Tạm thời dùng dữ liệu tĩnh:
         return {
             companyInfo: {
                 name: "Tây Bắc Travel",
                 address: "Thành phố Cần Thơ, Việt Nam",
-                insurance: "Có bảo hiểm du lịch lên đến 100.000.000 VNĐ cho mọi hành khách.",
-                paymentMethods: "Hỗ trợ thanh toán qua VNPAY, MOMO và Chuyển khoản ngân hàng.",
-                contact: "Hotline hỗ trợ: 1900 xxxx - Email: support@taybactravel.com"
-            },
-            instructionToAI: "Hãy dùng các thông tin trên để trả lời câu hỏi của khách hàng một cách tự nhiên nhất."
+                insurance: "Có bảo hiểm du lịch lên đến 100.000.000 VNĐ.",
+                paymentMethods: "Hỗ trợ VNPAY, MOMO và Chuyển khoản.",
+                contact: "Hotline: 1900 xxxx - Email: support@taybactravel.com"
+            }
         };
     }
 };
