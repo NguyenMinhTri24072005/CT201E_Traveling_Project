@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axiosClient from '../../api/axiosClient'; // 👉 CHÚ THÍCH: Đã đổi sang dùng axiosClient chuẩn của dự án
+import axiosClient from '../../api/axiosClient';
 import './Chatbot.css'; 
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext.jsx';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +11,7 @@ const Chatbot = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef(null);
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,10 +24,16 @@ const Chatbot = () => {
     const handleSendMessage = async () => {
         if (!input.trim()) return;
 
-        const historyToSend = messages.slice(-10).map(msg => ({
+        // Chuyển messages → định dạng OpenAI/Groq
+        const rawHistory = messages.slice(-10).map(msg => ({
             role: msg.sender === 'user' ? 'user' : 'assistant',
             content: msg.text
         }));
+
+        // Groq yêu cầu history phải BẮT ĐẦU bằng role 'user'.
+        // Cắt bỏ các entry 'assistant' ở đầu mảng (VD: tin chào mặc định của bot).
+        const firstUserIndex = rawHistory.findIndex(m => m.role === 'user');
+        const historyToSend = firstUserIndex === -1 ? [] : rawHistory.slice(firstUserIndex);
 
         const userMessage = { sender: 'user', text: input };
         setMessages(prev => [...prev, userMessage]);

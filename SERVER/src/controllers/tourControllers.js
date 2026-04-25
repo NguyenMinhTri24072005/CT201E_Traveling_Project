@@ -1,12 +1,11 @@
 const Tour = require('../models/Tours.js');
-const Location = require('../models/Locations.js'); 
+const Location = require('../models/Locations.js');
 const Category = require('../models/Categorys.js');
-const fs = require('fs'); 
+const fs = require('fs');
 const path = require('path');
 const { generateEmbedding } = require('../services/rag/embeddingService');
 
 const generateCleanTextForEmbedding = async (tourData) => {
-    // Lấy tên thật của Location và Category từ ID
     let locationName = "";
     let categoryName = "";
 
@@ -19,7 +18,6 @@ const generateCleanTextForEmbedding = async (tourData) => {
         if (cat) categoryName = cat.name;
     }
 
-    // Tính giá thấp nhất
     let minPrice = "Đang cập nhật";
     if (tourData.departures && tourData.departures.length > 0) {
         const validPrices = tourData.departures.map(d => d.adultPrice).filter(p => p != null && p > 0);
@@ -28,11 +26,10 @@ const generateCleanTextForEmbedding = async (tourData) => {
         }
     }
 
-    // Gom lịch trình và điểm nhấn
-    const highlightsText = tourData.highlights && tourData.highlights.length > 0 
+    const highlightsText = tourData.highlights && tourData.highlights.length > 0
         ? tourData.highlights.join(', ') : "";
 
-    const itineraryText = tourData.itinerary && tourData.itinerary.length > 0 
+    const itineraryText = tourData.itinerary && tourData.itinerary.length > 0
         ? tourData.itinerary.map(item => `${item.day}: ${item.content}`).join('. ') : "";
 
     const rawText = `
@@ -80,8 +77,8 @@ const tourControllers = {
                         { location: { $in: destIds } },
                         {
                             $or: [
-                                { name: { $regex: search, $options: 'i' } }, 
-                                { location: { $in: searchLocIds } }          
+                                { name: { $regex: search, $options: 'i' } },
+                                { location: { $in: searchLocIds } }
                             ]
                         }
                     ];
@@ -164,7 +161,6 @@ const tourControllers = {
             const creator = await User.findById(req.user.id);
             const initialStatus = creator.isTrusted ? 'Approved' : 'Pending';
 
-            // 👉 2. TẠO VECTOR AI NGAY KHI VỪA NHẬP XONG THÔNG TIN
             console.log("⚙️ Đang tạo Vector AI cho Tour mới...");
             const textToEmbed = await generateCleanTextForEmbedding(tourData);
             const embeddingVector = await generateEmbedding(textToEmbed);
@@ -191,8 +187,6 @@ const tourControllers = {
         try {
             const { id } = req.params;
             const tourData = req.body;
-
-            // 1. Giải mã dữ liệu JSON
             if (typeof tourData.departures === 'string') tourData.departures = JSON.parse(tourData.departures);
             if (typeof tourData.highlights === 'string') tourData.highlights = JSON.parse(tourData.highlights);
             if (typeof tourData.itinerary === 'string') tourData.itinerary = JSON.parse(tourData.itinerary);
@@ -200,12 +194,9 @@ const tourControllers = {
             const oldTour = await Tour.findById(id);
             if (!oldTour) return res.status(404).json("Không tìm thấy tour!");
 
-            // 👉 2. XỬ LÝ ẢNH GALLERY CHÍNH
             if (req.files && req.files['images'] && req.files['images'].length > 0) {
                 tourData.images = req.files['images'].map(file => `/uploads/tours/${file.filename}`);
-                tourData.image = ""; // Xóa trường ảnh đơn cũ
-
-                // Xóa file ảnh cũ khỏi server để tránh nặng máy
+                tourData.image = "";
                 if (oldTour.images && Array.isArray(oldTour.images)) {
                     oldTour.images.forEach(img => {
                         if (typeof img === 'string' && !img.includes('default')) {
@@ -215,18 +206,19 @@ const tourControllers = {
                     });
                 }
             }
-
-            // 👉 3. XỬ LÝ ẢNH LỊCH TRÌNH
             if (req.files && req.files['itineraryImages'] && req.files['itineraryImages'].length > 0) {
                 const itinFiles = req.files['itineraryImages'];
                 const imageMap = JSON.parse(req.body.itineraryImageMap || "[]");
-
                 imageMap.forEach((itinIndex, arrayIndex) => {
                     if (tourData.itinerary[itinIndex]) {
                         tourData.itinerary[itinIndex].image = `/uploads/tours/${itinFiles[arrayIndex].filename}`;
                     }
                 });
             }
+            const mergedData = { ...oldTour.toObject(), ...tourData };
+            console.log(`Đang cập nhật lại Vector AI cho Tour (ID: ${id})...`);
+            const textToEmbed = await generateCleanTextForEmbedding(mergedData);
+            tourData.embeddingVector = await generateEmbedding(textToEmbed);
 
             const updatedTour = await Tour.findByIdAndUpdate(id, tourData, { new: true });
             res.status(200).json(updatedTour);
@@ -236,7 +228,6 @@ const tourControllers = {
         }
     },
 
-    // 5. XÓA TOUR (ĐÃ SỬA LỖI STORAGE LEAK)
     deleteTour: async (req, res) => {
         try {
             const { id } = req.params;
@@ -245,8 +236,6 @@ const tourControllers = {
             if (!tour) {
                 return res.status(404).json("Không tìm thấy tour!");
             }
-
-            // 👉 SỬA LẠI: Xóa toàn bộ mảng ảnh trong ổ cứng
             if (tour.images && tour.images.length > 0) {
                 tour.images.forEach(img => {
                     if (!img.includes('default')) {

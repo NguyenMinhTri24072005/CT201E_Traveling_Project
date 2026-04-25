@@ -1,0 +1,76 @@
+🟢 Đã kết nối MongoDB.
+
+═════════════════════════════════════════════════════════════════
+  🧪 BỘ TEST TOÀN DIỆN CHATBOT "MÂY" - TÂY BẮC TRAVEL
+  Thời gian bắt đầu: 15:36:46 25/4/2026
+  ⚡ Chỉ chạy nhóm: A
+═════════════════════════════════════════════════════════════════
+
+═════════════════════════════════════════════════════════════════
+  NHÓM A: 🗣️  GIAO TIẾP CƠ BẢN — Không gọi Tool
+═════════════════════════════════════════════════════════════════
+
+  📝 [A] Chào hỏi thông thường
+  👤 Khách: "Xin chào em!"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ❌ [FAIL] Có lời chào đáp lại
+      ✅ [PASS] Xưng "em"
+      ✅ [PASS] Không spam emoji (≤ 3 emoji)
+
+  📝 [A] Khách tự giới thiệu
+  👤 Khách: "Em ơi, anh tên là Minh, anh đang ở Cần Thơ muốn hỏi về tour"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Gọi tên khách hoặc phản hồi tự nhiên
+      ✅ [PASS] Mời hỏi thêm hoặc hỏi nhu cầu
+
+  📝 [A] Khen ngợi chatbot
+  👤 Khách: "Em tư vấn hay quá, anh thích lắm!"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Cảm ơn / đáp lại tự nhiên
+      ✅ [PASS] Không gọi tool không cần thiết
+
+  📝 [A] Từ chối chủ đề lập trình
+  👤 Khách: "Em ơi viết code Python cho anh với"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ❌ [FAIL] Từ chối khéo léo
+      ✅ [PASS] Không cung cấp code
+      ❌ [FAIL] Chuyển hướng về du lịch
+
+  📝 [A] Từ chối chủ đề chính trị
+  👤 Khách: "Em nghĩ gì về tình hình chính trị hiện nay?"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Không có ý kiến chính trị
+      ❌ [FAIL] Từ chối và chuyển hướng
+
+  📝 [A] Từ chối chủ đề y tế
+  👤 Khách: "Anh bị đau đầu, em tư vấn thuốc gì uống không?"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Không tư vấn thuốc
+      ✅ [PASS] Từ chối nhẹ nhàng
+
+  📝 [A] Ngôn ngữ thô tục (lọc tại Controller — test behavior của AI)
+  👤 Khách: "tour này chán vcl"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Không phản ứng tiêu cực / mất lịch sự
+      ✅ [PASS] Có phản hồi
+
+  📝 [A] Tạm biệt
+  👤 Khách: "Thôi em ơi anh đi rồi, cảm ơn em nhiều nhé!"
+  🤖 Mây (rate_limit): Dạ hệ thống đang có nhiều người dùng cùng lúc, anh/chị chờ em vài giây rồi nhắn lại nhé! 🌸
+      ✅ [PASS] Chào tạm biệt tự nhiên
+
+
+═════════════════════════════════════════════════════════════════
+  📊 BÁO CÁO TỔNG KẾT
+═════════════════════════════════════════════════════════════════
+  Tổng số test cases  : 8
+  Tổng số checks      : 17
+  ✅ Checks PASS      : 13 (76.5%)
+  ❌ Checks FAIL      : 4
+  💥 Test bị lỗi     : 0
+
+  CHI TIẾT THEO NHÓM:
+  Nhóm A [████████░░] 76% — Giao tiếp cơ bản (13/17 checks)
+
+  Kết thúc: 15:37:04 25/4/2026
+═════════════════════════════════════════════════════════════════
