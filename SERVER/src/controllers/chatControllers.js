@@ -34,8 +34,7 @@ const sanitizeChatHistory = (history) => {
 const chatControllers = {
     handleChat: async (req, res) => {
         try {
-            const { message, chatHistory } = req.body;
-            const userId = req.user?.id || req.user?._id || null;
+            const { message, chatHistory, userId } = req.body;
             if (!message) return res.status(400).json({ error: "Tin nhắn không được để trống" });
 
             // Sanitize → đảm bảo đúng format OpenAI/Groq trước khi slice

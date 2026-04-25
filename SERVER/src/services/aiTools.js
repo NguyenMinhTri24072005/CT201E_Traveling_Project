@@ -208,14 +208,6 @@ const aiTools = {
             console.log("[TOOL EXECUTION] Đang chạy 'request_booking':", args);
             const { tourName, departureDate, adultCount, childCount = 0, fullName, phone, email, cccd, notes, userId } = args;
 
-            // 🔐 GUARD — Yêu cầu đăng nhập trước khi đặt tour
-            const isGuest = !userId || userId === '000000000000000000000000' || userId === 'null' || userId === 'undefined';
-            if (isGuest) {
-                return {
-                    error: "LOGIN_REQUIRED",
-                    message: "Khách chưa đăng nhập. Không thể tạo booking."
-                };
-            }
 
             // ✅ VALIDATION — Phát hiện dữ liệu AI tự bịa
             const FAKE_PATTERNS = [

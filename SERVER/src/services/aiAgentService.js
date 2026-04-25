@@ -211,7 +211,7 @@ const aiAgentService = {
     processUserMessage: async (userMessage, chatHistory = [], userId = null) => {
         try {
             const model = genAI.getGenerativeModel({
-                model: "gemini-3-flash-preview", 
+                model: "gemini-2.5-flash", 
                 systemInstruction: systemInstruction,
                 tools: tools,
             });
