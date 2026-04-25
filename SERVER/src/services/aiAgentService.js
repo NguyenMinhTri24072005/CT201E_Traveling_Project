@@ -194,7 +194,7 @@ const aiAgentService = {
                     toolData = await aiTools.executeCalculatePrice(args);
                 }
                 else if (toolName === "request_booking") { // Tool mới: Đặt tour
-                    toolData = await aiTools.executeRequestBooking(args);
+                    toolData = await aiTools.executeRequestBooking({ ...args, userId });
                 }
                 else if (toolName === "get_faq_info") { // Tool mới: Thông tin công ty
                     toolData = await aiTools.executeGetFaqInfo(args);

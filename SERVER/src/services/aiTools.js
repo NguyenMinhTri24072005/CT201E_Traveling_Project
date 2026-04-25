@@ -175,7 +175,7 @@ const aiTools = {
     executeRequestBooking: async (args) => {
         try {
             console.log("[TOOL EXECUTION] Đang chạy 'request_booking':", args);
-            const { tourName, departureDate, adultCount, childCount = 0, fullName, phone, email, cccd, notes } = args;
+            const { tourName, departureDate, adultCount, childCount = 0, fullName, phone, email, cccd, notes, userId } = args;
 
             const tour = await findTourByNameHelper(tourName);
             if (!tour) return { error: `Không tìm thấy tour '${tourName}'.` };
@@ -190,6 +190,7 @@ const aiTools = {
             const totalprice = (aCount * departure.adultPrice) + (cCount * childPrice);
 
             const newBooking = new Booking({
+                customer: userId || null, // Lưu ID thật của khách
                 customer: '000000000000000000000000', 
                 tour: tour._id,
                 departureId: departure._id,

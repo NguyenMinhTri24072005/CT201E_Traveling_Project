@@ -4,8 +4,9 @@ const aiAgentService = require('../services/aiAgentService');
 const chatControllers = {
     handleChat: async (req, res) => {
         try {
-            const { message, chatHistory } = req.body;
+            const { message, chatHistory, userId } = req.body;
             if (!message) return res.status(400).json({ error: "Tin nhắn không được để trống" });
+            const trimmedHistory = chatHistory ? chatHistory.slice(-10) : [];
 
             const sensitiveWords = ["đéo", "nín", "cút", "vcl"];
             const hasSensitiveWord = sensitiveWords.some(word => message.toLowerCase().includes(word));
@@ -19,7 +20,7 @@ const chatControllers = {
 
             console.log("\nKhách hàng:", message);
 
-            const aiResponse = await aiAgentService.processUserMessage(message, chatHistory);
+            const agentResponse = await aiAgentService.processUserMessage(message, trimmedHistory, userId);
 
             return res.status(200).json(aiResponse);
 
