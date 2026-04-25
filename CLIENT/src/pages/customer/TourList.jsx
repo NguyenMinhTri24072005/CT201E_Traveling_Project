@@ -38,12 +38,10 @@ export default function TourList() {
         fetchFilters();
     }, []);
 
-    // Reset về trang 1 khi thay đổi bất kỳ bộ lọc nào
     useEffect(() => {
         setCurrentPage(1);
     }, [searchTerm, priceRange, selectedLocation, selectedCategory]);
 
-    // Load lại danh sách tour khi thay đổi trang hoặc bộ lọc
     useEffect(() => {
         fetchTours();
     }, [currentPage, searchTerm, priceRange, selectedLocation, selectedCategory]);
@@ -70,7 +68,6 @@ export default function TourList() {
                 search: searchTerm,
                 minPrice,
                 maxPrice,
-                // 👉 Gửi id của location và category lên Backend
                 location: selectedLocation !== 'ALL' ? selectedLocation : '',
                 category: selectedCategory !== 'ALL' ? selectedCategory : ''
             };
@@ -94,7 +91,6 @@ export default function TourList() {
             </div>
 
             <div className="tour-list-container">
-                {/* THANH BÊN (SIDEBAR) BỘ LỌC */}
                 <div className="tour-sidebar">
                     <div className="filter-group">
                         <h3>Tìm kiếm</h3>
@@ -107,7 +103,6 @@ export default function TourList() {
                         />
                     </div>
 
-                    {/* 👉 DROPDOWN LỌC THEO ĐIỂM ĐẾN (ĐỘNG) */}
                     <div className="filter-group">
                         <h3>Điểm đến nổi bật</h3>
                         <select 
@@ -122,7 +117,6 @@ export default function TourList() {
                         </select>
                     </div>
 
-                    {/* 👉 DROPDOWN LỌC THEO DANH MỤC (ĐỘNG) */}
                     <div className="filter-group">
                         <h3>Danh mục Tour</h3>
                         <select 
