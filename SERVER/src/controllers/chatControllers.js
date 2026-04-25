@@ -22,12 +22,12 @@ const chatControllers = {
 
             const agentResponse = await aiAgentService.processUserMessage(message, trimmedHistory, userId);
 
-            return res.status(200).json(aiResponse);
+            return res.status(200).json(agentResponse);
 
         } catch (error) {
             if (error.status === 503 || error.status === 429) {
                 return res.status(200).json({
-                    reply: "nghẽn ời, tí quay lại",
+                    reply: "nghẽn ời, tí quay lại",                                                                                                                                                                                 
                     thinkingType: "system busy"
                 });
             }

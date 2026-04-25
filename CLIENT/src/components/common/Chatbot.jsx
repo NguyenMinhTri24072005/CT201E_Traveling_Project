@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axiosClient from '../../api/axiosClient'; // 👉 CHÚ THÍCH: Đã đổi sang dùng axiosClient chuẩn của dự án
 import './Chatbot.css'; 
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const Chatbot = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef(null);
+    const { user } = useContext(AuthContext);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -22,8 +24,6 @@ const Chatbot = () => {
     const handleSendMessage = async () => {
         if (!input.trim()) return;
 
-        // 👉 CHÚ THÍCH 1: Lấy lịch sử chat hiện tại (Chỉ lấy 10 tin nhắn gần nhất để tránh tràn RAM AI)
-        // Chuyển đổi 'sender' của React thành 'role' chuẩn của API (user / assistant)
         const historyToSend = messages.slice(-10).map(msg => ({
             role: msg.sender === 'user' ? 'user' : 'assistant',
             content: msg.text
@@ -35,11 +35,10 @@ const Chatbot = () => {
         setIsLoading(true);
 
         try {
-            // 👉 CHÚ THÍCH 2: Gửi kèm tham số chatHistory lên Backend
-            // Lưu ý: Tùy vào cấu hình baseURL trong axiosClient mà endpoint có thể là '/chat' hoặc '/api/chat'
             const response = await axiosClient.post('/chat', { 
                 message: userMessage.text,
-                chatHistory: historyToSend 
+                chatHistory: historyToSend,
+                userId: user?._id || null
             });
 
             const botMessage = { 

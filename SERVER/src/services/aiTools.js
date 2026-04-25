@@ -190,8 +190,7 @@ const aiTools = {
             const totalprice = (aCount * departure.adultPrice) + (cCount * childPrice);
 
             const newBooking = new Booking({
-                customer: userId || null, // Lưu ID thật của khách
-                customer: '000000000000000000000000', 
+                customer: userId || '000000000000000000000000',
                 tour: tour._id,
                 departureId: departure._id,
                 totalprice: totalprice,
@@ -205,7 +204,7 @@ const aiTools = {
                 status: 'pending_payment'
             });
 
-            // await newBooking.save(); 
+            await newBooking.save(); 
 
             return {
                 success: true,

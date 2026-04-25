@@ -29,7 +29,6 @@ const generateCleanTextForEmbedding = (tour) => {
     const highlightsText = tour.highlights && tour.highlights.length > 0 
         ? tour.highlights.join(', ') 
         : "";
-
     // 4. Gom nội dung lịch trình (Sử dụng 'day' và 'content' theo Schema)
     const itineraryText = tour.itinerary && tour.itinerary.length > 0 
         ? tour.itinerary.map(item => `${item.day}: ${item.content}`).join('. ') 

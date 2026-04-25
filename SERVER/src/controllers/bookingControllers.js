@@ -1,6 +1,7 @@
 const Booking = require('../models/Booking.js');
 const Tour = require('../models/Tours.js');
 const User = require('../models/Users.js');
+const { generateEmbedding } = require('../services/rag/embeddingService');
 
 const bookingControllers = {
     // 1. Khách hàng đặt tour (Tự động trích xuất % Hoa hồng Sàn)
@@ -8,28 +9,22 @@ const bookingControllers = {
         try {
             const { tourId, departureId, tickets, representative, passengers, paymentMethod, notes, isPaidNow } = req.body;
             const customerId = req.user.id;
-
             const tour = await Tour.findById(tourId);
             if (!tour) return res.status(404).json({ success: false, message: 'Không tìm thấy Tour' });
-
             const departure = tour.departures.id(departureId);
             if (!departure) return res.status(404).json({ success: false, message: 'Không tìm thấy ngày khởi hành' });
-
             const totalTickets = tickets.reduce((sum, ticket) => sum + ticket.quantity, 0);
-
             if (departure.availableslots < totalTickets) {
                 return res.status(400).json({ success: false, message: `Chỉ còn ${departure.availableslots} chỗ trống.` });
             }
 
-            let secureTotalPrice = 0; // ĐÂY LÀ BIẾN ĐÚNG
+            let secureTotalPrice = 0;
             const secureTickets = tickets.map(ticket => {
                 let actualPrice = 0;
                 if (ticket.ticketType === 'Người lớn') actualPrice = departure.adultPrice;
                 else if (ticket.ticketType === 'Trẻ em') actualPrice = departure.childPrice;
                 else if (ticket.ticketType === 'Em bé') actualPrice = departure.babyPrice;
-
                 secureTotalPrice += (ticket.quantity * actualPrice);
-
                 return {
                     ticketType: ticket.ticketType,
                     quantity: ticket.quantity,
@@ -37,16 +32,11 @@ const bookingControllers = {
                 };
             });
 
-            // 👉 THUẬT TOÁN KẾ TOÁN MỚI: Tính % Hoa hồng dựa vào Uy tín của Partner
-            // 1. Populate thông tin người tạo Tour (Partner)
             const tourInfo = await Tour.findById(tourId).populate('createdBy', 'commissionRate');
-
-            // 2. Lấy tỷ lệ chiết khấu của Partner đó (Nếu lỗi thì mặc định thu 10%)
             const rate = tourInfo?.createdBy?.commissionRate ?? 10;
-
-            // 3. Chốt sổ kế toán (👉 ĐÃ SỬA: Đổi totalPrice thành secureTotalPrice)
             const adminCommission = (secureTotalPrice * rate) / 100;
             const partnerRevenue = secureTotalPrice - adminCommission;
+            
 
             // Tạo hóa đơn
             const newBooking = new Booking({

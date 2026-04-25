@@ -1,12 +1,58 @@
 const Tour = require('../models/Tours.js');
-const fs = require('fs'); // 👉 THƯ VIỆN XỬ LÝ FILE CỦA NODE.JS
+const Location = require('../models/Locations.js'); 
+const Category = require('../models/Categorys.js');
+const fs = require('fs'); 
 const path = require('path');
+const { generateEmbedding } = require('../services/rag/embeddingService');
+
+const generateCleanTextForEmbedding = async (tourData) => {
+    // Lấy tên thật của Location và Category từ ID
+    let locationName = "";
+    let categoryName = "";
+
+    if (tourData.location) {
+        const loc = await Location.findById(tourData.location);
+        if (loc) locationName = loc.name;
+    }
+    if (tourData.category) {
+        const cat = await Category.findById(tourData.category);
+        if (cat) categoryName = cat.name;
+    }
+
+    // Tính giá thấp nhất
+    let minPrice = "Đang cập nhật";
+    if (tourData.departures && tourData.departures.length > 0) {
+        const validPrices = tourData.departures.map(d => d.adultPrice).filter(p => p != null && p > 0);
+        if (validPrices.length > 0) {
+            minPrice = Math.min(...validPrices) + " VNĐ";
+        }
+    }
+
+    // Gom lịch trình và điểm nhấn
+    const highlightsText = tourData.highlights && tourData.highlights.length > 0 
+        ? tourData.highlights.join(', ') : "";
+
+    const itineraryText = tourData.itinerary && tourData.itinerary.length > 0 
+        ? tourData.itinerary.map(item => `${item.day}: ${item.content}`).join('. ') : "";
+
+    const rawText = `
+        Tên tour: ${tourData.name}. 
+        Mã tour: ${tourData.code}.
+        Thể loại: ${categoryName}.
+        Điểm đến: ${locationName}.
+        Khởi hành từ: ${tourData.departureLocation}. 
+        Thời gian: ${tourData.duration}. 
+        Mức giá chỉ từ: ${minPrice}. 
+        Điểm nhấn nổi bật: ${highlightsText}. 
+        Lịch trình chi tiết: ${itineraryText}
+    `;
+
+    return rawText.replace(/\s+/g, ' ').trim();
+};
 
 const tourControllers = {
-    // 1. Lấy danh sách tất cả các tour (Có Lọc & Phân trang chuẩn Server-side)
     getAllTours: async (req, res) => {
         try {
-            // Nhận các tham số (query params) từ URL do Frontend gửi lên
             const {
                 page = 1,
                 limit = 9,
@@ -16,39 +62,33 @@ const tourControllers = {
                 destination
             } = req.query;
 
-            // Khởi tạo Object Query rỗng để nhét điều kiện vào dần
             const query = { status: 'Approved' };
             const Location = require('../models/Locations.js');
 
-            // 👉 BƯỚC 1: Tìm ID địa điểm nếu có từ khóa search
             let searchLocIds = [];
             if (search) {
                 const searchLocs = await Location.find({ name: { $regex: search, $options: 'i' } });
                 searchLocIds = searchLocs.map(loc => loc._id);
             }
 
-            // 👉 BƯỚC 2: Lọc theo Điểm đến từ Dropdown (Ví dụ: Khách chọn "Sapa")
             if (destination && destination !== 'ALL') {
                 const destLocs = await Location.find({ name: { $regex: destination, $options: 'i' } });
                 const destIds = destLocs.map(loc => loc._id);
 
                 if (search) {
-                    // Nếu khách VỪA NHẬP ô tìm kiếm VỪA CHỌN dropdown
                     query.$and = [
-                        { location: { $in: destIds } }, // Bắt buộc phải thuộc Dropdown
+                        { location: { $in: destIds } },
                         {
                             $or: [
-                                { name: { $regex: search, $options: 'i' } }, // Tên tour có chứa từ khóa
-                                { location: { $in: searchLocIds } }          // Hoặc tên địa điểm có chứa từ khóa
+                                { name: { $regex: search, $options: 'i' } }, 
+                                { location: { $in: searchLocIds } }          
                             ]
                         }
                     ];
                 } else {
-                    // Nếu khách CHỈ CHỌN Dropdown
                     query.location = { $in: destIds };
                 }
             }
-            // 👉 BƯỚC 3: Nếu khách CHỈ NHẬP ô tìm kiếm (Không chọn Dropdown)
             else if (search) {
                 query.$or = [
                     { name: { $regex: search, $options: 'i' } },
@@ -56,17 +96,14 @@ const tourControllers = {
                 ];
             }
 
-            // 👉 BƯỚC 4: Lọc theo Khoảng giá (Tìm vào mảng departures -> adultPrice)
             if (minPrice || maxPrice) {
                 let priceCondition = {};
                 if (minPrice) priceCondition.$gte = parseInt(minPrice);
                 if (maxPrice) priceCondition.$lte = parseInt(maxPrice);
 
-                // $elemMatch: Tìm xem có ÍT NHẤT 1 lịch khởi hành nào có giá lọt vào khoảng này không
                 query.departures = { $elemMatch: { adultPrice: priceCondition } };
             }
 
-            // Thực thi Query truy vấn vào Database
             const tours = await Tour.find(query)
                 .populate('category', 'name')
                 .populate('location', 'name')
@@ -89,7 +126,6 @@ const tourControllers = {
             res.status(500).json({ error: error.message });
         }
     },
-    // 2. LẤY CHI TIẾT 1 TOUR
     getTourById: async (req, res) => {
         try {
             const tour = await Tour.findById(req.params.id);
@@ -100,48 +136,46 @@ const tourControllers = {
         }
     },
 
-    // 2. TẠO TOUR MỚI
-    // 2. TẠO TOUR MỚI
     createTour: async (req, res) => {
         try {
             const tourData = req.body;
 
-            // 1. Giải mã các trường JSON từ chuỗi sang Array/Object
             if (typeof tourData.departures === 'string') tourData.departures = JSON.parse(tourData.departures);
             if (typeof tourData.highlights === 'string') tourData.highlights = JSON.parse(tourData.highlights);
             if (typeof tourData.itinerary === 'string') tourData.itinerary = JSON.parse(tourData.itinerary);
 
-            // 👉 2. XỬ LÝ ẢNH GALLERY CHÍNH (Trường 'images')
             let imageUrls = ["default-tour.jpg"];
             if (req.files && req.files['images'] && req.files['images'].length > 0) {
                 imageUrls = req.files['images'].map(file => `/uploads/tours/${file.filename}`);
             }
 
-            // 👉 3. XỬ LÝ ẢNH LỊCH TRÌNH (Trường 'itineraryImages')
             if (req.files && req.files['itineraryImages'] && req.files['itineraryImages'].length > 0) {
                 const itinFiles = req.files['itineraryImages'];
                 const imageMap = JSON.parse(req.body.itineraryImageMap || "[]");
 
                 imageMap.forEach((itinIndex, arrayIndex) => {
-                    // Gán đường dẫn ảnh vào đúng index của ngày trong mảng itinerary
                     if (tourData.itinerary[itinIndex]) {
                         tourData.itinerary[itinIndex].image = `/uploads/tours/${itinFiles[arrayIndex].filename}`;
                     }
                 });
             }
 
-            // 4. Xác định người tạo và trạng thái duyệt
             const User = require('../models/Users');
             const creator = await User.findById(req.user.id);
             const initialStatus = creator.isTrusted ? 'Approved' : 'Pending';
 
-            // 5. Tạo Object Tour mới
+            // 👉 2. TẠO VECTOR AI NGAY KHI VỪA NHẬP XONG THÔNG TIN
+            console.log("⚙️ Đang tạo Vector AI cho Tour mới...");
+            const textToEmbed = await generateCleanTextForEmbedding(tourData);
+            const embeddingVector = await generateEmbedding(textToEmbed);
+
             const newTour = new Tour({
                 ...tourData,
                 partner: req.user.id,
                 createdBy: req.user.id,
                 images: imageUrls, // Lưu mảng ảnh gallery
-                status: initialStatus
+                status: initialStatus,
+                embeddingVector: embeddingVector
             });
 
             const savedTour = await newTour.save();

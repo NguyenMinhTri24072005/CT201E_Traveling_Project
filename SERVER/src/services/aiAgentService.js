@@ -148,7 +148,7 @@ const tools = [
 ];
 
 const aiAgentService = {
-    processUserMessage: async (userMessage, chatHistory = []) => {
+    processUserMessage: async (userMessage, chatHistory = [], userId = null) => {
         try {
             const messages = [
                 { role: "system", content: systemInstruction },
