@@ -9,18 +9,44 @@ export default function TourList() {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState('ALL'); 
-    const [destination, setDestination] = useState('ALL');
+    
+    // 👉 Đổi destination thành selectedLocation và thêm selectedCategory
+    const [selectedLocation, setSelectedLocation] = useState('ALL');
+    const [selectedCategory, setSelectedCategory] = useState('ALL');
+
+    // 👉 State lưu dữ liệu Dropdown từ Database
+    const [locations, setLocations] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
+    // 👉 Fetch danh sách Location và Category 1 lần khi load trang
+    useEffect(() => {
+        const fetchFilters = async () => {
+            try {
+                const [locRes, catRes] = await Promise.all([
+                    axiosClient.get('/locations'),
+                    axiosClient.get('/categories')
+                ]);
+                setLocations(locRes.data);
+                setCategories(catRes.data);
+            } catch (error) {
+                console.error("Lỗi lấy danh mục filter:", error);
+            }
+        };
+        fetchFilters();
+    }, []);
+
+    // Reset về trang 1 khi thay đổi bất kỳ bộ lọc nào
     useEffect(() => {
         setCurrentPage(1);
-    }, [searchTerm, priceRange, destination]);
+    }, [searchTerm, priceRange, selectedLocation, selectedCategory]);
 
+    // Load lại danh sách tour khi thay đổi trang hoặc bộ lọc
     useEffect(() => {
         fetchTours();
-    }, [currentPage, searchTerm, priceRange, destination]);
+    }, [currentPage, searchTerm, priceRange, selectedLocation, selectedCategory]);
 
     const fetchTours = async () => {
         try {
@@ -44,7 +70,9 @@ export default function TourList() {
                 search: searchTerm,
                 minPrice,
                 maxPrice,
-                destination: destination !== 'ALL' ? destination : ''
+                // 👉 Gửi id của location và category lên Backend
+                location: selectedLocation !== 'ALL' ? selectedLocation : '',
+                category: selectedCategory !== 'ALL' ? selectedCategory : ''
             };
 
             const res = await axiosClient.get('/tours', { params });
@@ -79,19 +107,33 @@ export default function TourList() {
                         />
                     </div>
 
+                    {/* 👉 DROPDOWN LỌC THEO ĐIỂM ĐẾN (ĐỘNG) */}
                     <div className="filter-group">
                         <h3>Điểm đến nổi bật</h3>
                         <select 
-                            value={destination} 
-                            onChange={(e) => setDestination(e.target.value)}
+                            value={selectedLocation} 
+                            onChange={(e) => setSelectedLocation(e.target.value)}
                             className="filter-select"
                         >
                             <option value="ALL">Tất cả điểm đến</option>
-                            <option value="Sapa">Sapa</option>
-                            <option value="Hà Giang">Hà Giang</option>
-                            <option value="Mộc Châu">Mộc Châu</option>
-                            <option value="Cao Bằng">Cao Bằng</option>
-                            <option value="Điện Biên">Điện Biên</option>
+                            {locations.map(loc => (
+                                <option key={loc._id} value={loc._id}>{loc.name}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* 👉 DROPDOWN LỌC THEO DANH MỤC (ĐỘNG) */}
+                    <div className="filter-group">
+                        <h3>Danh mục Tour</h3>
+                        <select 
+                            value={selectedCategory} 
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                            className="filter-select"
+                        >
+                            <option value="ALL">Tất cả danh mục</option>
+                            {categories.map(cat => (
+                                <option key={cat._id} value={cat._id}>{cat.name}</option>
+                            ))}
                         </select>
                     </div>
 
@@ -125,7 +167,12 @@ export default function TourList() {
                         <div className="no-tour-found">
                             <h3>Không tìm thấy tour phù hợp 😢</h3>
                             <p>Vui lòng thử lại với từ khóa hoặc mức giá khác.</p>
-                            <button onClick={() => {setSearchTerm(''); setPriceRange('ALL'); setDestination('ALL');}} className="btn-reset">Xóa bộ lọc</button>
+                            <button onClick={() => {
+                                setSearchTerm(''); 
+                                setPriceRange('ALL'); 
+                                setSelectedLocation('ALL');
+                                setSelectedCategory('ALL');
+                            }} className="btn-reset">Xóa bộ lọc</button>
                         </div>
                     ) : (
                         <>

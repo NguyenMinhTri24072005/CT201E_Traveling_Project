@@ -10,6 +10,8 @@ const cartRoutes = require('./src/routes/cartRoutes');
 const chatRoutes = require('./src/routes/chatRoutes');
 const startCronJobs = require('./src/utils/cronJobs'); 
 const userRoutes = require('./src/routes/userRoutes'); 
+const locationRoutes = require('./src/routes/locationRoutes.js');
+const categoryRoutes = require('./src/routes/categoryRoutes.js');
 const http = require('http');           
 const { Server } = require('socket.io');
 const app = express();
@@ -69,14 +71,16 @@ app.use('/api/reviews', require('./src/routes/reviewRoutes'));
 app.use('/api/notifications', require('./src/routes/notificationRoutes'));
 app.use('/api/messages', require('./src/routes/messageRoutes'));
 app.use('/api/chat', chatRoutes);
+app.use('/api/locations', locationRoutes);
+app.use('/api/categories', categoryRoutes);
 
+// Import Models
 require('./src/models/Booking.js')
 require('./src/models/Users.js')
 require('./src/models/Tours.js')
-require('./src/models/Locations.js')
-require('./src/models/Categorys.js')
 require('./src/models/Reviews.js')
 require('./src/models/Cart.js')
+
 
 console.log('link db', process.env.MONGO_URI)
 console.log('port', process.env.PORT)

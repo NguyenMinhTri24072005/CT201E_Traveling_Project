@@ -56,23 +56,37 @@ const tourControllers = {
                 search = '',
                 minPrice,
                 maxPrice,
-                destination
+                destination,
+                location,  // 👉 Bắt thêm biến location (ID) từ Frontend
+                category   // 👉 Bắt thêm biến category (ID) từ Frontend
             } = req.query;
 
             const query = { status: 'Approved' };
-            const Location = require('../models/Locations.js');
 
-            let searchLocIds = [];
-            if (search) {
-                const searchLocs = await Location.find({ name: { $regex: search, $options: 'i' } });
-                searchLocIds = searchLocs.map(loc => loc._id);
+            // 1. Lọc theo Category (Danh mục)
+            if (category) {
+                query.category = category;
             }
 
-            if (destination && destination !== 'ALL') {
-                const destLocs = await Location.find({ name: { $regex: destination, $options: 'i' } });
-                const destIds = destLocs.map(loc => loc._id);
+            // 2. Xử lý logic Điểm đến (Kết hợp ID mới và chữ cũ để không lỗi hàm)
+            let destIds = [];
+            let hasLocationFilter = false;
 
-                if (search) {
+            if (location) {
+                destIds = [location]; // Dùng ID truyền từ dropdown mới
+                hasLocationFilter = true;
+            } else if (destination && destination !== 'ALL') {
+                const destLocs = await Location.find({ name: { $regex: destination, $options: 'i' } });
+                destIds = destLocs.map(loc => loc._id);
+                hasLocationFilter = true;
+            }
+
+            // 3. Xử lý Search kết hợp với Điểm đến
+            if (search) {
+                const searchLocs = await Location.find({ name: { $regex: search, $options: 'i' } });
+                const searchLocIds = searchLocs.map(loc => loc._id);
+
+                if (hasLocationFilter) {
                     query.$and = [
                         { location: { $in: destIds } },
                         {
@@ -83,16 +97,16 @@ const tourControllers = {
                         }
                     ];
                 } else {
-                    query.location = { $in: destIds };
+                    query.$or = [
+                        { name: { $regex: search, $options: 'i' } },
+                        { location: { $in: searchLocIds } }
+                    ];
                 }
-            }
-            else if (search) {
-                query.$or = [
-                    { name: { $regex: search, $options: 'i' } },
-                    { location: { $in: searchLocIds } }
-                ];
+            } else if (hasLocationFilter) {
+                query.location = { $in: destIds };
             }
 
+            // 4. Lọc theo Giá
             if (minPrice || maxPrice) {
                 let priceCondition = {};
                 if (minPrice) priceCondition.$gte = parseInt(minPrice);
@@ -123,6 +137,7 @@ const tourControllers = {
             res.status(500).json({ error: error.message });
         }
     },
+    
     getTourById: async (req, res) => {
         try {
             const tour = await Tour.findById(req.params.id);
@@ -169,7 +184,7 @@ const tourControllers = {
                 ...tourData,
                 partner: req.user.id,
                 createdBy: req.user.id,
-                images: imageUrls, // Lưu mảng ảnh gallery
+                images: imageUrls, 
                 status: initialStatus,
                 embeddingVector: embeddingVector
             });
@@ -317,23 +332,19 @@ const tourControllers = {
             res.status(500).json({ error: error.message });
         }
     },
-    // ... các hàm cũ giữ nguyên (getTours, getTourById, createTour...)
 
     // [MỚI] API GỢI Ý TOUR TƯƠNG TỰ (Recommender System - Content-Based Filtering)
     getRecommendations: async (req, res) => {
         try {
             const tourId = req.params.id;
 
-            // 1. Lấy thông tin của tour khách hàng đang xem
             const currentTour = await Tour.findById(tourId);
             if (!currentTour) {
                 return res.status(404).json({ message: "Không tìm thấy tour gốc" });
             }
 
-            // 2. Thuật toán: Tìm các tour CÙNG DANH MỤC hoặc CÙNG ĐIỂM ĐẾN
-            // Điều kiện: Phải là tour đã được duyệt (Approved) và KHÔNG TRÙNG với tour đang xem
             const recommendations = await Tour.find({
-                _id: { $ne: tourId }, // $ne: Not Equal (Loại trừ tour hiện tại)
+                _id: { $ne: tourId },
                 status: 'Approved',
                 $or: [
                     { category: currentTour.category },

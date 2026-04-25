@@ -19,10 +19,12 @@ import UserManagement from '../pages/admin/UserManagement';
 import EditTour from '../pages/admin/EditTour';
 import AdminProfile from "../pages/admin/AdminProfile";
 import Profile from '../pages/customer/Profile';
-import Chat from '../pages/chat/Chat'; 
+import Chat from '../pages/chat/Chat';
 import NotificationManagement from '../pages/admin/NotificationManagement';
 import ShopSettings from '../pages/admin/ShopSettings';
 import PartnerShop from '../pages/customer/PartnerShop';
+import ManageLocations from '../pages/admin/ManageLocations'
+import ManageCategories from '../pages/admin/ManageCategories'
 
 export default function AppRouter() {
     return (
@@ -30,7 +32,7 @@ export default function AppRouter() {
             <Routes>
                 {/* nhánh 1: dành cho khách hàng */}
                 <Route path="/" element={<CustomerLayout />}>
-                    <Route index element={<Home />} /> 
+                    <Route index element={<Home />} />
                     <Route path="/tour/:id" element={<TourDetail />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/login" element={<Login />} />
@@ -55,6 +57,8 @@ export default function AppRouter() {
                     <Route path="profile" element={<AdminProfile />} />
                     <Route path="notifications" element={<NotificationManagement />} />
                     <Route path="shop-settings" element={<ShopSettings />} />
+                    <Route path="/admin/locations" element={<ManageLocations />} />
+                    <Route path="/admin/categories" element={<ManageCategories />} />
                 </Route>
             </Routes>
         </BrowserRouter>

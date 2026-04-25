@@ -1,0 +1,103 @@
+/* ====================================================
+   MANAGE LOCATIONS STYLES
+==================================================== */
+
+.location-form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.location-form-group {
+    margin-top: 10px;
+}
+
+.btn-submit-location {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.btn-cancel-location {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background: #f1f2f6;
+    color: #2c3e50;
+    border: 1px solid #dcdde1;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel-location:hover {
+    background: #e1e2e6;
+}
+
+/* Bảng Điểm Đến */
+.location-table {
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.location-table th {
+    background: #2d4271;
+    color: #fff;
+    text-align: left;
+    padding: 15px;
+}
+
+.location-table tr {
+    border-bottom: 1px solid #eee;
+    transition: background 0.2s ease;
+}
+
+.location-table tr:hover {
+    background: #f9f9fa;
+}
+
+.location-table td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+/* Nút hành động trong bảng */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit-location {
+    background: rgba(52, 152, 219, 0.1);
+    color: #2980b9;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-edit-location:hover {
+    background: rgba(52, 152, 219, 0.2);
+}
+
+.btn-delete-location {
+    background: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-delete-location:hover {
+    background: rgba(231, 76, 60, 0.2);
+}

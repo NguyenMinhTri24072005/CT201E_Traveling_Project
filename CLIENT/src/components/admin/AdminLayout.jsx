@@ -47,10 +47,23 @@ export default function AdminLayout() {
                         🗺️ Quản lý Tour
                     </Link>
 
+                    {/* 👉 CÁC MENU DÀNH RIÊNG CHO ADMIN */}
                     {role === 'Admin' && (
-                        <Link to="/admin/users" className={location.pathname.includes('/users') ? 'active' : ''}>
-                            👥 Quản lý Người dùng
-                        </Link>
+                        <>
+                            <Link to="/admin/users" className={location.pathname.includes('/users') ? 'active' : ''}>
+                                👥 Quản lý Người dùng
+                            </Link>
+                            
+                            {/* Bổ sung tab Điểm đến */}
+                            <Link to="/admin/locations" className={location.pathname.includes('/locations') ? 'active' : ''}>
+                                📍 Quản lý Điểm Đến
+                            </Link>
+
+                            {/* Bổ sung tab Danh mục */}
+                            <Link to="/admin/categories" className={location.pathname.includes('/categories') ? 'active' : ''}>
+                                🏷️ Quản lý Danh Mục
+                            </Link>
+                        </>
                     )}
 
                     {role === 'Admin' && (
@@ -62,6 +75,7 @@ export default function AdminLayout() {
                         </NavLink>
                     )}
 
+                    {/* 👉 MENU DÀNH RIÊNG CHO PARTNER */}
                     {role === 'Partner' && (
                         <NavLink to="/admin/shop-settings" className={({ isActive }) => (isActive ? 'active' : '')}>
                             🏪 Thiết lập Gian hàng

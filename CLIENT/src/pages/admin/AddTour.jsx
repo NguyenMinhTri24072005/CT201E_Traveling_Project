@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosClient from '../../api/axiosClient';
 import { useNavigate } from 'react-router-dom';
 import { IMAGE_URL } from '../../utils/constants'; // Đảm bảo đã import hằng số này
@@ -16,6 +16,8 @@ const AMENITIES_LIST = [
 export default function AddTour() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [locations, setLocations] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [imageFiles, setImageFiles] = useState([]);
     const [basicInfo, setBasicInfo] = useState({
         name: '',
@@ -23,6 +25,8 @@ export default function AddTour() {
         durationDays: 3,
         durationNights: 2,
         departureLocation: DEPARTURE_LOCATIONS[0],
+        location: '', 
+        category: ''
     });
 
     const [highlights, setHighlights] = useState([]);
@@ -32,6 +36,27 @@ export default function AddTour() {
         date: '', returnDate: '', transport: TRANSPORT_METHODS[0],
         adultPrice: 0, childPrice: 0, babyPrice: 0, maxslots: 20, availableslots: 20
     }]);
+
+    // 👉 FETCH DỮ LIỆU LOCATION VÀ CATEGORY KHI LOAD TRANG
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [locRes, catRes] = await Promise.all([
+                    axiosClient.get('/locations'),
+                    axiosClient.get('/categories')
+                ]);
+                setLocations(locRes.data);
+                setCategories(catRes.data);
+                
+                // Gán giá trị mặc định cho select box nếu có dữ liệu
+                if(locRes.data.length > 0) setBasicInfo(prev => ({...prev, location: locRes.data[0]._id}));
+                if(catRes.data.length > 0) setBasicInfo(prev => ({...prev, category: catRes.data[0]._id}));
+            } catch (error) {
+                console.error("Lỗi tải danh mục:", error);
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleItinImageChange = (index, file) => {
         setItinFiles(prev => ({ ...prev, [index]: file }));
@@ -74,6 +99,10 @@ export default function AddTour() {
         const formattedDuration = `${basicInfo.durationDays} Ngày ${basicInfo.durationNights} Đêm`;
         formData.append('duration', formattedDuration);
         formData.append('departureLocation', basicInfo.departureLocation);
+        
+        // 👉 GỬI LOCATION VÀ CATEGORY LÊN BACKEND
+        formData.append('location', basicInfo.location);
+        formData.append('category', basicInfo.category);
         
         // Fix lỗi thiếu commission nếu bạn dùng trường này
         if(basicInfo.commissionPerPerson) {
@@ -129,6 +158,25 @@ export default function AddTour() {
                         <label>Mã Tour (VD: SP-01)</label>
                         <input required type="text" name="code" onChange={handleBasicChange} className="form-input" />
                     </div>
+
+                    {/* 👉 BỔ SUNG Ô CHỌN ĐIỂM ĐẾN VÀ DANH MỤC */}
+                    <div className="form-group">
+                        <label>Điểm đến (Location)</label>
+                        <select name="location" value={basicInfo.location} onChange={handleBasicChange} className="form-input" required>
+                            {locations.map(loc => (
+                                <option key={loc._id} value={loc._id}>{loc.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label>Danh mục (Category)</label>
+                        <select name="category" value={basicInfo.category} onChange={handleBasicChange} className="form-input" required>
+                            {categories.map(cat => (
+                                <option key={cat._id} value={cat._id}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
+
                     <div className="form-group">
                         <label>Thời lượng</label>
                         <div className="duration-group">
