@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosClient from '../../api/axiosClient';
 import './AdminStyles.css';
-import './ManageCategorys.css'; // 👉 Nhúng file CSS mới vào đây
+import './ManageCategorys.css'; 
 
 export default function ManageCategories() {
     const [categories, setCategories] = useState([]);

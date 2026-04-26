@@ -78,19 +78,19 @@
     padding: 12px 15px;
     border-radius: 30px;
     background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     font-family: inherit;
     font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .dashboard-filter-input:focus {
     border-color: #3498db;
     background: rgba(255, 255, 255, 0.95);
     outline: none;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15), inset 0 2px 5px rgba(0,0,0,0.01);
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15), inset 0 2px 5px rgba(0, 0, 0, 0.01);
 }
 
 .btn-apply-filter {
@@ -105,16 +105,21 @@
     gap: 8px;
     height: 46px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-apply-filter:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.btn-filter-partner { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-.btn-filter-admin { background: linear-gradient(135deg, #e31837, #c0392b); }
+.btn-filter-partner {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.btn-filter-admin {
+    background: linear-gradient(135deg, #e31837, #c0392b);
+}
 
 /* ================= THẺ THỐNG KÊ (GRID) ================= */
 .stats-grid {
@@ -132,20 +137,20 @@
     padding: 30px;
     display: flex;
     align-items: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0, 0, 0, 0.02);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .stat-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
     border-color: rgba(255, 255, 255, 0.9);
 }
 
 .stat-icon {
-    width: 70px;
-    height: 70px;
+    width: 30px;
+    height: 30px;
     border-radius: 30px;
     display: flex;
     justify-content: center;
@@ -153,7 +158,7 @@
     font-size: 32px;
     margin-right: 20px;
     flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .stat-info {
@@ -163,15 +168,15 @@
 
 .stat-info h3 {
     margin: 0 0 8px 0;
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #7f8c8d;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .stat-info p {
     margin: 0;
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    font-weight: 900;
+    font-size: clamp(1.3rem, 1.5vw, 1.3rem);
+    font-weight: 700;
     color: #2c3e50;
     letter-spacing: 0.5px;
     word-break: break-word;
@@ -179,22 +184,64 @@
 }
 
 /* Các Class màu sắc tự custom cho thẻ */
-.card-revenue .stat-icon { background: linear-gradient(135deg, #f8f9fa, #e1e8ed); color: #7f8c8d; }
-.card-revenue .stat-info p { color: #34495e; }
+.card-revenue .stat-icon {
+    background: linear-gradient(135deg, #f8f9fa, #e1e8ed);
+    color: #7f8c8d;
+}
 
-.card-net .stat-card { background: rgba(240, 253, 244, 0.7); border-color: rgba(46, 204, 113, 0.3); }
-.card-net .stat-icon { background: linear-gradient(135deg, #2ecc71, #27ae60); color: #fff; box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3); }
-.card-net .stat-info p { color: #27ae60; font-size: clamp(1.3rem, 3vw, 2rem); }
+.card-revenue .stat-info p {
+    color: #34495e;
+}
 
-.card-admin-profit .stat-card { background: rgba(253, 250, 246, 0.7); border-color: rgba(243, 156, 18, 0.3); }
-.card-admin-profit .stat-icon { background: linear-gradient(135deg, #f39c12, #d35400); color: #fff; box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3); }
-.card-admin-profit .stat-info p { color: #d35400; font-size: clamp(1.3rem, 3vw, 2rem); }
+.card-net .stat-card {
+    background: rgba(240, 253, 244, 0.7);
+    border-color: rgba(46, 204, 113, 0.3);
+}
 
-.card-orders .stat-icon { background: linear-gradient(135deg, #e8f4f8, #d6eaf8); color: #3498db; }
-.card-orders .stat-info p { color: #2980b9; }
+.card-net .stat-icon {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
 
-.card-tours .stat-icon { background: linear-gradient(135deg, #fdf2f2, #fceae9); color: #e74c3c; }
-.card-tours .stat-info p { color: #c0392b; }
+.card-net .stat-info p {
+    color: #27ae60;
+    font-size: clamp(1.3rem, 1.5vw, 2rem);
+}
+
+.card-admin-profit .stat-card {
+    background: rgba(253, 250, 246, 0.7);
+    border-color: rgba(243, 156, 18, 0.3);
+}
+
+.card-admin-profit .stat-icon {
+    background: linear-gradient(135deg, #f39c12, #d35400);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
+.card-admin-profit .stat-info p {
+    color: #d35400;
+    font-size: clamp(1.3rem, 1.5vw, 2rem);
+}
+
+.card-orders .stat-icon {
+    background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+    color: #3498db;
+}
+
+.card-orders .stat-info p {
+    color: #2980b9;
+}
+
+.card-tours .stat-icon {
+    background: linear-gradient(135deg, #fdf2f2, #fceae9);
+    color: #e74c3c;
+}
+
+.card-tours .stat-info p {
+    color: #c0392b;
+}
 
 
 /* ================= BIỂU ĐỒ (GLASS) ================= */
@@ -237,7 +284,7 @@
     backdrop-filter: blur(40px) saturate(180%) !important;
     border-radius: 30px !important;
     border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
     padding: 12px 18px !important;
     font-family: 'Inter', sans-serif !important;
 }
@@ -247,11 +294,23 @@
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {
-    .stats-grid { grid-template-columns: 1fr; }
-    .chart-section-wrapper { padding: 20px; }
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-section-wrapper {
+        padding: 20px;
+    }
 }

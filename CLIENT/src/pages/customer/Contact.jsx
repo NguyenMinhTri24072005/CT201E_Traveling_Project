@@ -18,7 +18,7 @@ export default function Contact() {
             text: 'Cảm ơn bạn đã liên hệ. Đội ngũ Tây Bắc Travel sẽ phản hồi qua email của bạn trong thời gian sớm nhất.',
             confirmButtonColor: '#2ecc71'
         });
-        setFormData({ name: '', email: '', subject: '', message: '' }); 
+        setFormData({ name: '', email: '', subject: '', message: '' });
     };
 
     return (
@@ -33,23 +33,23 @@ export default function Contact() {
                 <div className="contact-info">
                     <h2>Thông Tin Liên Hệ</h2>
                     <p className="info-desc">Đừng ngần ngại ghé thăm văn phòng hoặc gọi điện cho chúng tôi để được tư vấn lộ trình tốt nhất.</p>
-                    
+
                     <div className="info-item">
                         <div className="icon-box"><FiMapPin /></div>
                         <div>
                             <strong>Trụ sở chính:</strong>
-                            <p>Số 123 Đường Điện Biên Phủ, Thị xã Sapa, Lào Cai</p>
+                            <p>đường 3/2, Ninh Kiều, Cần Thơ</p>
                         </div>
                     </div>
-                    
+
                     <div className="info-item">
                         <div className="icon-box"><FiPhone /></div>
                         <div>
                             <strong>Hotline (24/7):</strong>
-                            <p>1900 8888 - 0987 654 321</p>
+                            <p>0365651302</p>
                         </div>
                     </div>
-                    
+
                     <div className="info-item">
                         <div className="icon-box"><FiMail /></div>
                         <div>
@@ -90,17 +90,10 @@ export default function Contact() {
 
             {/* Google Map */}
             <div className="contact-map">
-                <iframe 
-                    title="Google Map Sapa"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118318.06830508524!2d103.74317855427192!3d22.331201944773826!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd416cdd9c74ab%3A0xcda6580a56fc0fc3!2zU2EgUGEsIEzDoG8gQ2FpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1714032123456!5m2!1svi!2s" 
-                    width="100%" 
-                    height="450" 
-                    style={{ border: 0 }} 
-                    allowFullScreen="" 
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                >
-                </iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4435.293673105421!2d105.76804037550582!3d10.029938972517908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2sCan%20Tho%20University!5e1!3m2!1sen!2s!4v1777204231866!5m2!1sen!2s"
+                    width="100%"
+                    height="450"
+                    style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     );

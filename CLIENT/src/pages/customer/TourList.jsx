@@ -8,8 +8,8 @@ export default function TourList() {
     const [loading, setLoading] = useState(true);
 
     const [searchTerm, setSearchTerm] = useState('');
-    const [priceRange, setPriceRange] = useState('ALL'); 
-    
+    const [priceRange, setPriceRange] = useState('ALL');
+
     // 👉 Đổi destination thành selectedLocation và thêm selectedCategory
     const [selectedLocation, setSelectedLocation] = useState('ALL');
     const [selectedCategory, setSelectedCategory] = useState('ALL');
@@ -52,19 +52,19 @@ export default function TourList() {
 
             let minPrice = '';
             let maxPrice = '';
-            
+
             if (priceRange === 'under5') {
-                maxPrice = 5000000; 
+                maxPrice = 5000000;
             } else if (priceRange === '5to10') {
                 minPrice = 5000000;
-                maxPrice = 10000000; 
+                maxPrice = 10000000;
             } else if (priceRange === 'over10') {
-                minPrice = 10000000; 
+                minPrice = 10000000;
             }
 
             const params = {
                 page: currentPage,
-                limit: 9, 
+                limit: 9,
                 search: searchTerm,
                 minPrice,
                 maxPrice,
@@ -73,7 +73,7 @@ export default function TourList() {
             };
 
             const res = await axiosClient.get('/tours', { params });
-            
+
             setTours(res.data.tours);
             setTotalPages(res.data.totalPages);
             setLoading(false);
@@ -94,9 +94,9 @@ export default function TourList() {
                 <div className="tour-sidebar">
                     <div className="filter-group">
                         <h3>Tìm kiếm</h3>
-                        <input 
-                            type="text" 
-                            placeholder="Nhập tên tour hoặc địa điểm..." 
+                        <input
+                            type="text"
+                            placeholder="Nhập tên tour hoặc địa điểm..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             className="search-input"
@@ -105,8 +105,8 @@ export default function TourList() {
 
                     <div className="filter-group">
                         <h3>Điểm đến nổi bật</h3>
-                        <select 
-                            value={selectedLocation} 
+                        <select
+                            value={selectedLocation}
                             onChange={(e) => setSelectedLocation(e.target.value)}
                             className="filter-select"
                         >
@@ -119,8 +119,8 @@ export default function TourList() {
 
                     <div className="filter-group">
                         <h3>Danh mục Tour</h3>
-                        <select 
-                            value={selectedCategory} 
+                        <select
+                            value={selectedCategory}
                             onChange={(e) => setSelectedCategory(e.target.value)}
                             className="filter-select"
                         >
@@ -135,19 +135,19 @@ export default function TourList() {
                         <h3>Mức giá</h3>
                         <div className="radio-group">
                             <label>
-                                <input type="radio" name="price" value="ALL" checked={priceRange === 'ALL'} onChange={(e) => setPriceRange(e.target.value)} /> 
+                                <input type="radio" name="price" value="ALL" checked={priceRange === 'ALL'} onChange={(e) => setPriceRange(e.target.value)} />
                                 Tất cả mức giá
                             </label>
                             <label>
-                                <input type="radio" name="price" value="under5" checked={priceRange === 'under5'} onChange={(e) => setPriceRange(e.target.value)} /> 
+                                <input type="radio" name="price" value="under5" checked={priceRange === 'under5'} onChange={(e) => setPriceRange(e.target.value)} />
                                 Dưới 5.000.000₫
                             </label>
                             <label>
-                                <input type="radio" name="price" value="5to10" checked={priceRange === '5to10'} onChange={(e) => setPriceRange(e.target.value)} /> 
+                                <input type="radio" name="price" value="5to10" checked={priceRange === '5to10'} onChange={(e) => setPriceRange(e.target.value)} />
                                 5.000.000₫ - 10.000.000₫
                             </label>
                             <label>
-                                <input type="radio" name="price" value="over10" checked={priceRange === 'over10'} onChange={(e) => setPriceRange(e.target.value)} /> 
+                                <input type="radio" name="price" value="over10" checked={priceRange === 'over10'} onChange={(e) => setPriceRange(e.target.value)} />
                                 Trên 10.000.000₫
                             </label>
                         </div>
@@ -162,8 +162,8 @@ export default function TourList() {
                             <h3>Không tìm thấy tour phù hợp 😢</h3>
                             <p>Vui lòng thử lại với từ khóa hoặc mức giá khác.</p>
                             <button onClick={() => {
-                                setSearchTerm(''); 
-                                setPriceRange('ALL'); 
+                                setSearchTerm('');
+                                setPriceRange('ALL');
                                 setSelectedLocation('ALL');
                                 setSelectedCategory('ALL');
                             }} className="btn-reset">Xóa bộ lọc</button>
@@ -178,16 +178,16 @@ export default function TourList() {
 
                             {totalPages > 1 && (
                                 <div className="pagination">
-                                    <button 
-                                        disabled={currentPage === 1} 
+                                    <button
+                                        disabled={currentPage === 1}
                                         onClick={() => setCurrentPage(prev => prev - 1)}
                                     >
                                         &laquo; Trước
                                     </button>
 
                                     {[...Array(totalPages)].map((_, i) => (
-                                        <button 
-                                            key={i} 
+                                        <button
+                                            key={i}
                                             className={currentPage === i + 1 ? 'active' : ''}
                                             onClick={() => setCurrentPage(i + 1)}
                                         >
@@ -195,8 +195,8 @@ export default function TourList() {
                                         </button>
                                     ))}
 
-                                    <button 
-                                        disabled={currentPage === totalPages} 
+                                    <button
+                                        disabled={currentPage === totalPages}
                                         onClick={() => setCurrentPage(prev => prev + 1)}
                                     >
                                         Sau &raquo;

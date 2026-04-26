@@ -8,21 +8,21 @@ import './Home.css';
 import sapaImg from '../../assets/images/home-images/sapa.png';
 import haGiangImg from '../../assets/images/home-images/ha-giang.webp';
 import mocChauImg from '../../assets/images/home-images/moc-chau.webp';
-import muCangChaiImg from '../../assets/images/home-images/mu-cang-chai.jpg'; 
+import muCangChaiImg from '../../assets/images/home-images/mu-cang-chai.jpg';
 
 export default function Home() {
     const [tours, setTours] = useState([]);
-    const [destination, setDestination] = useState(""); 
-    const [priceRange, setPriceRange] = useState("");   
-    const [startDate, setStartDate] = useState("");     
+    const [destination, setDestination] = useState("");
+    const [priceRange, setPriceRange] = useState("");
+    const [startDate, setStartDate] = useState("");
 
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTours = async () => {
             try {
-                const response = await axiosClient.get('/tours?limit=8'); 
-                setTours(response.data.tours); 
+                const response = await axiosClient.get('/tours?limit=8');
+                setTours(response.data.tours);
             } catch (error) {
                 console.error("Lỗi tải danh sách tour:", error);
             }
@@ -61,10 +61,10 @@ export default function Home() {
 
                     <form className="search-box" onSubmit={handleSearch}>
                         <div className="search-item">
-                            <label><FiMapPin className="search-icon"/> Bạn muốn đi đâu?</label>
+                            <label><FiMapPin className="search-icon" /> Bạn muốn đi đâu?</label>
                             <input
                                 type="text"
-                                list="location-options" 
+                                list="location-options"
                                 placeholder="VD: Sapa, Hà Giang..."
                                 value={destination}
                                 onChange={(e) => setDestination(e.target.value)}
@@ -79,7 +79,7 @@ export default function Home() {
                         </div>
 
                         <div className="search-item">
-                            <label><FiCalendar className="search-icon"/> Khởi hành</label>
+                            <label><FiCalendar className="search-icon" /> Khởi hành</label>
                             <input
                                 type="date"
                                 value={startDate}
@@ -88,7 +88,7 @@ export default function Home() {
                         </div>
 
                         <div className="search-item">
-                            <label><FiDollarSign className="search-icon"/> Mức giá</label>
+                            <label><FiDollarSign className="search-icon" /> Mức giá</label>
                             <select value={priceRange} onChange={(e) => setPriceRange(e.target.value)}>
                                 <option value="">Tất cả mức giá</option>
                                 <option value="low">Dưới 5 triệu</option>
@@ -107,7 +107,7 @@ export default function Home() {
             {/* ================= ĐỊA ĐIỂM NỔI BẬT ================= */}
             <section className="destinations-section container">
                 <div className="section-header">
-                    <h2>🔥 Điểm Đến Hot Nhất</h2>
+                    <h2>Điểm Đến Hot Nhất</h2>
                     <p>Những tọa độ không thể bỏ lỡ trong tháng này</p>
                 </div>
                 <div className="destinations-grid">
@@ -157,7 +157,7 @@ export default function Home() {
             {/* ================= TOUR NỔI BẬT ================= */}
             <section className="tours-section container">
                 <div className="section-header">
-                    <h2>🎒 Tour Đang Mở Bán</h2>
+                    <h2>Tour Đang Mở Bán</h2>
                     <p>Khám phá các gói Tour được yêu thích nhất từ các Đối tác của chúng tôi</p>
                 </div>
                 <div className="tours-grid">
