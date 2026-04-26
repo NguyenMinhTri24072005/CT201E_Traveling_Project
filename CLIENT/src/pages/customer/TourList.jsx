@@ -10,18 +10,15 @@ export default function TourList() {
     const [searchTerm, setSearchTerm] = useState('');
     const [priceRange, setPriceRange] = useState('ALL');
 
-    // 👉 Đổi destination thành selectedLocation và thêm selectedCategory
     const [selectedLocation, setSelectedLocation] = useState('ALL');
     const [selectedCategory, setSelectedCategory] = useState('ALL');
 
-    // 👉 State lưu dữ liệu Dropdown từ Database
     const [locations, setLocations] = useState([]);
     const [categories, setCategories] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
-    // 👉 Fetch danh sách Location và Category 1 lần khi load trang
     useEffect(() => {
         const fetchFilters = async () => {
             try {

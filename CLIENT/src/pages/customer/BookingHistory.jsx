@@ -333,7 +333,7 @@ export default function BookingHistory() {
                             <BookingStepper status={item.status} />
 
                             <div className="booking-card-body">
-                                <img src={item.tour?.image ? `${IMAGE_URL}${item.tour.image}` : "https://via.placeholder.com/200"} alt="tour" className="booking-thumbnail" />
+                                <img src={item.tour?.images && item.tour.images.length > 0 ? `${IMAGE_URL}${item.tour.images[0]}` : "https://via.placeholder.com/200"} alt="tour" className="booking-thumbnail" />
 
                                 <div className="booking-info">
                                     <div className="booking-header">
