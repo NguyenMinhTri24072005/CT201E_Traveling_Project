@@ -3,7 +3,7 @@ import axiosClient from '../../api/axiosClient';
 import Swal from 'sweetalert2';
 import BookingTable from '../../components/admin/BookingTable';
 import './AdminStyles.css';
-import './AdminBookingManagement.css'; // 👉 Tái sử dụng CSS của Admin
+import './AdminBookingManagement.css'; 
 
 export default function PartnerBookingManagement() {
     const [bookings, setBookings] = useState([]);
