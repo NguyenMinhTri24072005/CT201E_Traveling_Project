@@ -63,6 +63,18 @@ Mở Terminal, đi đến thư mục `SERVER` và chạy:
 npm run dev:all
 ```
 
+### tạo dữ liệu ảo
+Mở Terminal, đến thư mục `SERVER` và chạy: 
+```bash
+node seedTour.js
+```
+
+### Tạo tài khoản admin
+Mở Terminal, đến thư mục `SERVER` và chạy:
+```bash
+node createAdmin.js
+```
+
 **Hoàn tất!** Hệ thống lúc này đã hoạt động:
 * Giao diện người dùng (Frontend) truy cập tại: `http://localhost:5173`
 * Máy chủ API (Backend) chạy ngầm tại cổng `3000`.
