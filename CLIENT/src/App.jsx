@@ -1,11 +1,11 @@
-import AppRouter from './routes/AppRouter';
-import Chatbot from './components/common/Chatbot'; // Đường dẫn mới theo cây thư mục
+import AppRouter from "./routes/AppRouter";
+import Chatbot from "./components/common/Chatbot";
 
 function App() {
   return (
     <>
       <AppRouter />
-      <Chatbot /> 
+      <Chatbot />
     </>
   );
 }

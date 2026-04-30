@@ -1,65 +1,61 @@
-// SERVER/src/models/Tours.js
-const mongoose = require('mongoose')
-
-const tourSchema = new mongoose.Schema({
-    // 1. Thông tin cơ bản
+const mongoose = require("mongoose");
+const tourSchema = new mongoose.Schema(
+  {
     name: { type: String, required: true },
-    code: { type: String, required: true, unique: true }, // VD: NDO-HAN-SAPA-001
-    duration: { type: String, required: true }, // VD: "3 Ngày 2 Đêm"
-    departureLocation: { type: String, required: true }, // Nơi khởi hành (VD: "Hà Nội")
-    
-    // 2. Hình ảnh
+    code: { type: String, required: true, unique: true },
+    duration: { type: String, required: true },
+    departureLocation: { type: String, required: true },
+
     images: {
-        type: [String], // Mảng các chuỗi URL
-        required: true,
-        default: []
+      type: [String],
+      required: true,
+      default: [],
     },
-    gallery: [String], 
-
-    // 3. Phân loại & Đối tác
-    partner: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    location: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
-    category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
-
-    // 4. Nội dung chi tiết
-    highlights: [String], // Mảng chứa các điểm nhấn
-    itinerary: [{         // Mảng chứa lịch trình từng ngày
+    gallery: [String],
+    partner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    location: { type: mongoose.Schema.Types.ObjectId, ref: "Location" },
+    category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
+    highlights: [String],
+    itinerary: [
+      {
         day: String,
         meals: String,
         content: String,
-        image: String
-    }],
-
-    // 5. Lịch khởi hành & Giá
-    departures: [{
-        date: String,           // VD: "15/03/2026"
-        returnDate: String,     // VD: "17/03/2026"
-        dayOfWeek: String,      // VD: "Chủ Nhật"
-        transport: String,      // VD: "Limousine"
+        image: String,
+      },
+    ],
+    departures: [
+      {
+        date: String,
+        returnDate: String,
+        dayOfWeek: String,
+        transport: String,
         adultPrice: Number,
         childPrice: Number,
         babyPrice: Number,
         surcharge: { type: Number, default: 0 },
         maxslots: { type: Number, default: 20 },
-        availableslots: { type: Number, default: 20 }
-    }],
-    createdBy: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', 
-        required: true 
+        availableslots: { type: Number, default: 20 },
+      },
+    ],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     status: {
-        type: String,
-        enum: ['Pending', 'Approved', 'Rejected'], // Các trạng thái hợp lệ
-        default: 'Pending' // Mặc định là 'Pending' khi Partner vừa tạo Tour
+      type: String,
+      enum: ["Pending", "Approved", "Rejected"],
+      default: "Pending",
     },
-    rejectReason: { 
-        type: String, // Lý do từ chối (nếu Admin chọn 'Rejected')
-        default: '' 
+    rejectReason: {
+      type: String,
+      default: "",
     },
-    averageRating: { type: Number, default: 0 }, // Điểm sao trung bình (VD: 4.8)
+    averageRating: { type: Number, default: 0 },
     totalReviews: { type: Number, default: 0 },
-    embeddingVector: { type: [Number], select: false } // select: false để ẩn đi khi API thường gọi đến, cho nhẹ mạng
-}, { timestamps: true })
-
-module.exports = mongoose.model('Tour', tourSchema)
+    embeddingVector: { type: [Number], select: false },
+  },
+  { timestamps: true },
+);
+module.exports = mongoose.model("Tour", tourSchema);

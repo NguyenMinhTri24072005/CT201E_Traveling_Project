@@ -1,224 +1,213 @@
-/* ====================================================
-   BOOKING TABLE - GLASSMORPHISM & ANTIGRAVITY
-==================================================== */
-
 .empty-table-cell {
-    text-align: center;
-    padding: 40px;
-    color: #7f8c8d;
-    font-size: 1.1rem;
-    background: rgba(255,255,255,0.3);
+  text-align: center;
+  padding: 40px;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .tour-name-highlight {
-    color: #2980b9;
-    font-weight: 800;
-    font-size: 1.05rem;
+  color: #2980b9;
+  font-weight: 800;
+  font-size: 1.05rem;
 }
 
 .tour-date-sub {
-    font-size: 0.85rem;
-    color: #7f8c8d;
-    margin-top: 4px;
-    font-weight: 500;
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
 .customer-name {
-    font-weight: 700;
-    color: #2c3e50;
+  font-weight: 700;
+  color: #2c3e50;
 }
 
 .customer-phone {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 4px;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 4px;
 }
 
 .action-buttons-group {
-    display: flex;
-    gap: 12px;
-    align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .status-select {
-    padding: 8px 12px;
-    cursor: pointer;
-    width: auto;
-    border-radius: 8px;
-    border: 1px solid rgba(0,0,0,0.1);
-    background: rgba(255,255,255,0.8);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    outline: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  width: auto;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  outline: none;
 }
 
 .status-select:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
 .btn-action {
-    color: #fff;
-    border: none;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: bold;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: bold;
 }
 
 .btn-action:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .btn-view {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, #3498db, #2980b9);
 }
 
 .btn-delete {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
 }
 
-/* ====================================================
-   CSS CHO SWEETALERT CHI TIẾT ĐƠN HÀNG
-==================================================== */
-
 .swal-detail-body {
-    text-align: left;
-    line-height: 1.7;
-    font-size: 15px;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 .swal-divider {
-    border: 0;
-    border-top: 1px solid rgba(0,0,0,0.08);
-    margin: 20px 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 20px 0;
 }
 
 .swal-contact-name {
-    color: #2d4271;
-    margin: 0 0 8px 0;
-    font-weight: 800;
-    font-size: 1.1rem;
+  color: #2d4271;
+  margin: 0 0 8px 0;
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 
 .swal-contact-info {
-    margin: 0 0 8px 0;
-    color: #4a5568;
+  margin: 0 0 8px 0;
+  color: #4a5568;
 }
 
-/* Khu vực hiển thị vé */
 .swal-ticket-container {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    padding: 15px 20px;
-    border-radius: 30px;
-    margin: 20px 0;
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(40px) saturate(180%);
+  padding: 15px 20px;
+  border-radius: 30px;
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 
 .swal-section-title {
-    color: #2c3e50;
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
 .swal-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
 }
 
 .swal-list-item {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed rgba(0,0,0,0.1);
-    padding: 8px 0;
-    color: #4a5568;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  color: #4a5568;
 }
 
 .swal-list-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .swal-qty-highlight {
-    color: #e31837;
-    font-weight: 800;
+  color: #e31837;
+  font-weight: 800;
 }
 
-/* Khu vực người đi cùng */
 .swal-passenger-container {
-    background: rgba(52, 152, 219, 0.05);
-    padding: 15px 20px;
-    border-radius: 30px;
-    margin: 20px 0;
-    border: 1px solid rgba(52, 152, 219, 0.1);
+  background: rgba(52, 152, 219, 0.05);
+  padding: 15px 20px;
+  border-radius: 30px;
+  margin: 20px 0;
+  border: 1px solid rgba(52, 152, 219, 0.1);
 }
 
 .swal-passenger-title {
-    color: #2980b9;
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
+  color: #2980b9;
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
 
 .swal-passenger-list {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
-    font-size: 14px;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+  font-size: 14px;
 }
 
 .swal-passenger-item {
-    border-bottom: 1px dashed rgba(52, 152, 219, 0.2);
-    padding: 8px 0;
+  border-bottom: 1px dashed rgba(52, 152, 219, 0.2);
+  padding: 8px 0;
 }
 
 .swal-passenger-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .swal-passenger-type {
-    color: #e67e22;
-    font-weight: 700;
+  color: #e67e22;
+  font-weight: 700;
 }
 
 .swal-passenger-subinfo {
-    font-size: 13px;
-    color: #7f8c8d;
-    margin-top: 4px;
+  font-size: 13px;
+  color: #7f8c8d;
+  margin-top: 4px;
 }
 
-/* Khu vực tài chính */
 .swal-finance-container {
-    margin-top: 25px;
-    padding: 20px;
-    border-top: 2px dashed rgba(45, 66, 113, 0.2);
-    background: rgba(253, 250, 246, 0.7);
-    border-radius: 30px;
+  margin-top: 25px;
+  padding: 20px;
+  border-top: 2px dashed rgba(45, 66, 113, 0.2);
+  background: rgba(253, 250, 246, 0.7);
+  border-radius: 30px;
 }
 
 .swal-finance-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    color: #4a5568;
-    font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #4a5568;
+  font-weight: 500;
 }
 
 .swal-finance-discount {
-    color: #e74c3c;
-    font-weight: 700;
+  color: #e74c3c;
+  font-weight: 700;
 }
 
 .swal-finance-net {
-    font-size: 1.3rem;
-    color: #27ae60;
-    font-weight: 900;
-    border-top: 1px solid rgba(0,0,0,0.1);
-    padding-top: 12px;
-    margin-top: 5px;
+  font-size: 1.3rem;
+  color: #27ae60;
+  font-weight: 900;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 12px;
+  margin-top: 5px;
 }

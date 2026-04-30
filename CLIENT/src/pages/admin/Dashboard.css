@@ -1,316 +1,318 @@
-/* ====================================================
-   DASHBOARD - GLASSMORPHISM & ANTIGRAVITY
-==================================================== */
-
 .dashboard-page {
-    padding: 10px 20px 40px;
-    width: 100%;
-    box-sizing: border-box;
+  padding: 10px 20px 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .dashboard-title {
-    color: #2d4271;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    border-bottom: 2px solid rgba(45, 66, 113, 0.1);
-    padding-bottom: 15px;
-    font-weight: 800;
+  color: #2d4271;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(45, 66, 113, 0.1);
+  padding-bottom: 15px;
+  font-weight: 800;
 }
 
 .dashboard-alert {
-    padding: 20px;
-    color: #e74c3c;
-    background: rgba(231, 76, 60, 0.1);
-    border-radius: 30px;
-    border: 1px solid rgba(231, 76, 60, 0.2);
+  padding: 20px;
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 30px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
 }
 
 .dashboard-loading {
-    text-align: center;
-    color: #3498db;
-    margin: 40px 0;
-    font-size: 1.2rem;
-    font-weight: bold;
+  text-align: center;
+  color: #3498db;
+  margin: 40px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-/* ================= FILTER BAR ================= */
 .dashboard-filter-bar {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 25px;
-    border-radius: 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    margin-bottom: 40px;
-    display: flex;
-    gap: 20px;
-    align-items: flex-end;
-    flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 25px;
+  border-radius: 30px;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  margin-bottom: 40px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .filter-bar-partner {
-    border-left: 5px solid #2ecc71;
+  border-left: 5px solid #2ecc71;
 }
 
 .filter-bar-admin {
-    border-left: 5px solid #e31837;
+  border-left: 5px solid #e31837;
 }
 
 .dashboard-filter-group {
-    flex: 1 1 200px;
+  flex: 1 1 200px;
 }
 
 .dashboard-filter-group.large {
-    flex: 1 1 300px;
+  flex: 1 1 300px;
 }
 
 .dashboard-filter-group label {
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #2d4271;
-    margin-bottom: 8px;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2d4271;
+  margin-bottom: 8px;
 }
 
 .dashboard-filter-input {
-    width: 100%;
-    padding: 12px 15px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .dashboard-filter-input:focus {
-    border-color: #3498db;
-    background: rgba(255, 255, 255, 0.95);
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15), inset 0 2px 5px rgba(0, 0, 0, 0.01);
+  border-color: #3498db;
+  background: rgba(255, 255, 255, 0.95);
+  outline: none;
+  box-shadow:
+    0 0 0 4px rgba(52, 152, 219, 0.15),
+    inset 0 2px 5px rgba(0, 0, 0, 0.01);
 }
 
 .btn-apply-filter {
-    padding: 12px 30px;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-weight: 800;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 46px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 12px 30px;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .btn-apply-filter:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .btn-filter-partner {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
 }
 
 .btn-filter-admin {
-    background: linear-gradient(135deg, #e31837, #c0392b);
+  background: linear-gradient(135deg, #e31837, #c0392b);
 }
 
-/* ================= THẺ THỐNG KÊ (GRID) ================= */
 .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border-radius: 30px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 2px 5px rgba(0, 0, 0, 0.02);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border-radius: 30px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 5px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 
 .stat-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
-    border-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.9);
 }
 
 .stat-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 32px;
-    margin-right: 20px;
-    flex-shrink: 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  margin-right: 20px;
+  flex-shrink: 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .stat-info {
-    overflow: hidden;
-    flex: 1;
+  overflow: hidden;
+  flex: 1;
 }
 
 .stat-info h3 {
-    margin: 0 0 8px 0;
-    font-size: 1rem;
-    color: #7f8c8d;
-    font-weight: 800;
+  margin: 0 0 8px 0;
+  font-size: 1rem;
+  color: #7f8c8d;
+  font-weight: 800;
 }
 
 .stat-info p {
-    margin: 0;
-    font-size: clamp(1.3rem, 1.5vw, 1.3rem);
-    font-weight: 700;
-    color: #2c3e50;
-    letter-spacing: 0.5px;
-    word-break: break-word;
-    white-space: normal;
+  margin: 0;
+  font-size: clamp(1.3rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  color: #2c3e50;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+  white-space: normal;
 }
 
-/* Các Class màu sắc tự custom cho thẻ */
 .card-revenue .stat-icon {
-    background: linear-gradient(135deg, #f8f9fa, #e1e8ed);
-    color: #7f8c8d;
+  background: linear-gradient(135deg, #f8f9fa, #e1e8ed);
+  color: #7f8c8d;
 }
 
 .card-revenue .stat-info p {
-    color: #34495e;
+  color: #34495e;
 }
 
 .card-net .stat-card {
-    background: rgba(240, 253, 244, 0.7);
-    border-color: rgba(46, 204, 113, 0.3);
+  background: rgba(240, 253, 244, 0.7);
+  border-color: rgba(46, 204, 113, 0.3);
 }
 
 .card-net .stat-icon {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
 }
 
 .card-net .stat-info p {
-    color: #27ae60;
-    font-size: clamp(1.3rem, 1.5vw, 2rem);
+  color: #27ae60;
+  font-size: clamp(1.3rem, 1.5vw, 2rem);
 }
 
 .card-admin-profit .stat-card {
-    background: rgba(253, 250, 246, 0.7);
-    border-color: rgba(243, 156, 18, 0.3);
+  background: rgba(253, 250, 246, 0.7);
+  border-color: rgba(243, 156, 18, 0.3);
 }
 
 .card-admin-profit .stat-icon {
-    background: linear-gradient(135deg, #f39c12, #d35400);
-    color: #fff;
-    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+  background: linear-gradient(135deg, #f39c12, #d35400);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
 }
 
 .card-admin-profit .stat-info p {
-    color: #d35400;
-    font-size: clamp(1.3rem, 1.5vw, 2rem);
+  color: #d35400;
+  font-size: clamp(1.3rem, 1.5vw, 2rem);
 }
 
 .card-orders .stat-icon {
-    background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
-    color: #3498db;
+  background: linear-gradient(135deg, #e8f4f8, #d6eaf8);
+  color: #3498db;
 }
 
 .card-orders .stat-info p {
-    color: #2980b9;
+  color: #2980b9;
 }
 
 .card-tours .stat-icon {
-    background: linear-gradient(135deg, #fdf2f2, #fceae9);
-    color: #e74c3c;
+  background: linear-gradient(135deg, #fdf2f2, #fceae9);
+  color: #e74c3c;
 }
 
 .card-tours .stat-info p {
-    color: #c0392b;
+  color: #c0392b;
 }
 
-
-/* ================= BIỂU ĐỒ (GLASS) ================= */
 .chart-section-wrapper {
-    margin-top: 40px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    padding: 35px;
-    border-radius: 30px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  margin-top: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  padding: 35px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .chart-section-title {
-    color: #2d4271;
-    border-bottom: 2px solid rgba(45, 66, 113, 0.1);
-    padding-bottom: 15px;
-    margin-bottom: 25px;
-    font-size: 1.5rem;
-    font-weight: 800;
+  color: #2d4271;
+  border-bottom: 2px solid rgba(45, 66, 113, 0.1);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 .chart-empty {
-    text-align: center;
-    color: #95a5a6;
-    padding: 40px;
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 30px;
+  text-align: center;
+  color: #95a5a6;
+  padding: 40px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
 }
 
 .chart-container {
-    width: 100%;
-    min-height: 400px;
+  width: 100%;
+  min-height: 400px;
 }
 
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-    background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(40px) saturate(180%) !important;
-    border-radius: 30px !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
-    padding: 12px 18px !important;
-    font-family: 'Inter', sans-serif !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  border-radius: 30px !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  padding: 12px 18px !important;
+  font-family: "Inter", sans-serif !important;
 }
 
 .fade-in {
-    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .chart-section-wrapper {
-        padding: 20px;
-    }
+  .chart-section-wrapper {
+    padding: 20px;
+  }
 }

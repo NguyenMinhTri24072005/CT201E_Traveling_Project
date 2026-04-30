@@ -1,399 +1,398 @@
-/* ====================================================
-   HEADER - IOS LIQUID GLASS (FLOATING CAPSULE)
-==================================================== */
-
 .customer-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 30px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    
-    /* Liquid Glass Effect (iOS 26 Style) */
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.4);
-    border-radius: 50px;
-    
-    position: sticky;
-    top: 20px; /* Thêm khoảng trống để tạo hiệu ứng nổi */
-    margin: 20px auto;
-    width: 95%;
-    max-width: 1400px;
-    z-index: 1000;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-radius: 50px;
+
+  position: sticky;
+  top: 20px;
+  margin: 20px auto;
+  width: 95%;
+  max-width: 1400px;
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Logo */
 .header-logo {
-    font-size: 28px;
-    font-weight: 800;
-    color: #2d4271;
-    text-decoration: none;
-    letter-spacing: -0.5px;
-    transition: transform 0.3s ease;
+  font-size: 28px;
+  font-weight: 800;
+  color: #2d4271;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: transform 0.3s ease;
 }
 
 .header-logo:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .header-logo span {
-    color: #e31837;
+  color: #e31837;
 }
 
-/* Menu điều hướng */
 .header-nav {
-    display: flex;
-    gap: 30px;
+  display: flex;
+  gap: 30px;
 }
 
 .header-nav a {
-    text-decoration: none;
-    color: #2c3e50;
-    font-weight: 600;
-    font-size: 15px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 10px 18px;
-    border-radius: 30px; /* Pill shape */
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    position: relative;
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative;
 }
 
 .header-nav a:hover {
-    color: #e31837;
-    background: rgba(255, 255, 255, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  color: #e31837;
+  background: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* Khu vực nút bấm bên phải */
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .icon-btn {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    color: #2d4271;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  color: #2d4271;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 }
 
 .icon-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    background: rgba(255, 255, 255, 0.9);
-    color: #e31837;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  color: #e31837;
 }
 
 .login-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(45, 66, 113, 0.3);
-    color: #2d4271;
-    border-radius: 30px; 
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(45, 66, 113, 0.3);
+  color: #2d4271;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
 .login-btn:hover {
-    background: #2d4271;
-    color: white;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(45, 66, 113, 0.3);
-    border-color: #2d4271;
+  background: #2d4271;
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(45, 66, 113, 0.3);
+  border-color: #2d4271;
 }
 
 .register-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 24px;
-    background:  #2d4271;
-    opacity: 0.9;
-    border: 1px solid rgba(45, 66, 113, 0.3);
-    color: #ffffff;
-    border-radius: 30px; 
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: #2d4271;
+  opacity: 0.9;
+  border: 1px solid rgba(45, 66, 113, 0.3);
+  color: #ffffff;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
 .register-btn:hover {
-    background: #ffffff;
-    color: #2d4271;
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(45, 66, 113, 0.3);
-    border-color: #2d4271;
+  background: #ffffff;
+  color: #2d4271;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(45, 66, 113, 0.3);
+  border-color: #2d4271;
 }
 
-/* =======================================
-   THÔNG BÁO (NOTIFICATION) - GLASS
-   ======================================= */
 .notif-wrapper {
-    position: relative;
+  position: relative;
 }
 
 .notif-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: linear-gradient(135deg, #ff6b6b, #e74c3c);
-    color: white;
-    font-size: 10px;
-    font-weight: bold;
-    padding: 3px 6px;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #ff6b6b, #e74c3c);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 6px;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
 }
 
 .notif-dropdown {
-    position: absolute;
-    top: 65px;
-    right: -10px;
-    width: 380px;
-    
-    /* Liquid Glass Effect */
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 24px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    
-    z-index: 1000;
-    overflow: hidden;
-    animation: fadeInDown 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  position: absolute;
+  top: 65px;
+  right: -10px;
+  width: 380px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  z-index: 1000;
+  overflow: hidden;
+  animation: fadeInDown 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .notif-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .notif-header h4 {
-    margin: 0;
-    color: #2d4271;
-    font-size: 1.1rem;
-    font-weight: 700;
+  margin: 0;
+  color: #2d4271;
+  font-size: 1.1rem;
+  font-weight: 700;
 }
 
 .notif-read-all-btn {
-    background: none;
-    border: none;
-    color: #3498db;
-    font-size: 0.85rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: color 0.2s;
+  background: none;
+  border: none;
+  color: #3498db;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.2s;
 }
-.notif-read-all-btn:hover { color: #2980b9; }
+.notif-read-all-btn:hover {
+  color: #2980b9;
+}
 
 .notif-list {
-    max-height: 400px;
-    overflow-y: auto;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .notif-item {
-    padding: 15px 20px;
-    border-bottom: 1px solid rgba(0,0,0,0.03);
-    cursor: pointer;
-    display: flex;
-    gap: 15px;
-    transition: all 0.3s ease;
-    background: transparent;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  display: flex;
+  gap: 15px;
+  transition: all 0.3s ease;
+  background: transparent;
 }
 
 .notif-item.unread {
-    background: rgba(52, 152, 219, 0.05);
+  background: rgba(52, 152, 219, 0.05);
 }
 
 .notif-item:hover {
-    background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.9);
 }
 
 .notif-item-icon {
-    font-size: 1.5rem;
-    align-self: flex-start;
-    color: #3498db;
+  font-size: 1.5rem;
+  align-self: flex-start;
+  color: #3498db;
 }
 
-.notif-item-content { flex: 1; }
+.notif-item-content {
+  flex: 1;
+}
 
 .notif-item-title {
-    color: #2c3e50;
-    font-size: 0.95rem;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 4px;
+  color: #2c3e50;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
 }
 
 .notif-item-message {
-    color: #555;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    display: block;
+  color: #555;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  display: block;
 }
 
 .notif-item-time {
-    color: #95a5a6;
-    font-size: 0.75rem;
-    margin-top: 6px;
-    display: block;
-    font-weight: 500;
+  color: #95a5a6;
+  font-size: 0.75rem;
+  margin-top: 6px;
+  display: block;
+  font-weight: 500;
 }
 
 .notif-dot {
-    width: 8px;
-    height: 8px;
-    background: #3498db;
-    border-radius: 50%;
-    align-self: center;
-    margin-left: auto;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+  width: 8px;
+  height: 8px;
+  background: #3498db;
+  border-radius: 50%;
+  align-self: center;
+  margin-left: auto;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
 }
 
-/* =======================================
-   USER DROPDOWN - GLASS
-   ======================================= */
 .user-dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    padding: 5px 10px;
-    border-radius: 30px;
-    transition: background 0.3s;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 30px;
+  transition: background 0.3s;
 }
 
 .user-dropdown:hover {
-    background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .user-greeting {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    color: #2d4271;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #2d4271;
 }
 
 .user-avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.8);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 130%;
-    min-width: 240px;
-    
-    /* Liquid Glass Effect */
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 24px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    
-    z-index: 10;
-    overflow: hidden;
-    padding: 10px 0;
-    animation: fadeInDown 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 130%;
+  min-width: 240px;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  z-index: 10;
+  overflow: hidden;
+  padding: 10px 0;
+  animation: fadeInDown 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .user-dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 .dropdown-content a,
 .logout-btn {
-    color: #2d4271;
-    padding: 12px 20px;
-    text-decoration: none;
-    display: block;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: left;
-    width: 100%;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
+  color: #2d4271;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
 .dropdown-content a:hover,
 .logout-btn:hover {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: #e31837;
-    transform: translateX(5px);
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #e31837;
+  transform: translateX(5px);
 }
 
 .admin-link {
-    font-weight: 600;
-    color: #e31837 !important;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-weight: 600;
+  color: #e31837 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .logout-btn {
-    border-top: 1px solid rgba(0,0,0,0.05);
-    color: #e31837;
-    font-weight: 600;
-    margin-top: 4px;
-}
-/* Mở rộng vùng nhận diện chuột từ thẻ cha xuống dưới */
-.user-dropdown::after {
-    content: "";
-    position: absolute;
-    bottom: -60px; /* Thả dài xuống dưới 60px để chạm tới dropdown */
-    left: 0;
-    width: 100%;
-    height: 60px;
-    background: transparent; 
-    z-index: 1;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  color: #e31837;
+  font-weight: 600;
+  margin-top: 4px;
 }
 
-/* Đảm bảo dropdown luôn hiển thị khi chuột nằm trên user-dropdown HOẶC cái cầu ::after */
+.user-dropdown::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: transparent;
+  z-index: 1;
+}
+
 .user-dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }

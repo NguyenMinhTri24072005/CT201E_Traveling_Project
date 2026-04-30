@@ -1,198 +1,214 @@
-/* ====================================================
-   ABOUT US - GLASSMORPHISM & ANTIGRAVITY
-==================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 .about-page {
-    width: 100%;
-    background: linear-gradient(135deg, #f0f4fd 0%, #e1e8f5 100%);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  width: 100%;
+  background: linear-gradient(135deg, #f0f4fd 0%, #e1e8f5 100%);
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
-/* --- HERO BANNER --- */
 .about-hero {
-    position: relative;
-    height: 45vh;
-    min-height: 400px;
-    background-color: #2d4271; 
-    background-image: url('https://images.unsplash.com/photo-1583501306385-de21e102e3b1?q=80&w=2000&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    border-bottom-left-radius: 40px;
-    border-bottom-right-radius: 40px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    overflow: hidden;
+  position: relative;
+  height: 45vh;
+  min-height: 400px;
+  background-color: #2d4271;
+  background-image: url("https://images.unsplash.com/photo-1583501306385-de21e102e3b1?q=80&w=2000&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 .about-hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(45, 66, 113, 0.8), rgba(227, 24, 55, 0.5));
-    backdrop-filter: blur(40px) saturate(180%);
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(45, 66, 113, 0.8),
+    rgba(227, 24, 55, 0.5)
+  );
+  backdrop-filter: blur(40px) saturate(180%);
 }
 
 .about-hero-content {
-    position: relative;
-    z-index: 1;
-    padding: 0 20px;
-    animation: fadeInDown 0.8s ease-out;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+  animation: fadeInDown 0.8s ease-out;
 }
 
 .about-hero-content h1 {
-    font-size: 4rem;
-    font-weight: 900;
-    margin-bottom: 15px;
-    text-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    letter-spacing: -1px;
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: -1px;
 }
 
 .about-hero-content p {
-    font-size: 1.3rem;
-    font-weight: 500;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .about-container {
-    max-width: 1250px;
-    margin: 0 auto;
-    padding: 100px 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 100px 20px;
 }
 
-/* --- PHẦN CÂU CHUYỆN (STORY) --- */
 .about-story {
-    display: flex;
-    gap: 80px;
-    align-items: center;
-    margin-bottom: 120px;
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 120px;
 }
 
 .story-text {
-    flex: 1;
+  flex: 1;
 }
 
 .story-text h2 {
-    color: #2d4271;
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 30px;
-    position: relative;
-    padding-bottom: 15px;
+  color: #2d4271;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 15px;
 }
 
 .story-text h2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 80px;
-    height: 5px;
-    background: linear-gradient(90deg, #e31837, #c0392b);
-    border-radius: 5px;
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 5px;
+  background: linear-gradient(90deg, #e31837, #c0392b);
+  border-radius: 5px;
 }
 
 .story-text p {
-    font-size: 1.15rem;
-    line-height: 1.8;
-    color: #4a5568;
-    margin-bottom: 20px;
-    text-align: justify;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 20px;
+  text-align: justify;
 }
 
 .story-image {
-    flex: 1;
-    position: relative;
+  flex: 1;
+  position: relative;
 }
 
 .story-image img {
-    width: 100%;
-    min-height: 400px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.05);
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  min-height: 400px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 30px;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.15),
+    0 10px 20px rgba(0, 0, 0, 0.05);
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .story-image:hover img {
-    transform: translateY(-15px) scale(1.02);
+  transform: translateY(-15px) scale(1.02);
 }
 
-/* --- PHẦN GIÁ TRỊ CỐT LÕI (VALUES) --- */
 .text-center {
-    text-align: center;
-    color: #2d4271;
-    font-size: 2.8rem;
-    font-weight: 800;
-    margin-bottom: 60px;
-    letter-spacing: -0.5px;
+  text-align: center;
+  color: #2d4271;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 60px;
+  letter-spacing: -0.5px;
 }
 
 .values-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
 }
 
 .value-card {
-    background: rgba(255, 255, 255, 0.35);
-    backdrop-filter: blur(40px) saturate(180%);
-    -webkit-backdrop-filter: blur(40px) saturate(180%);
-    padding: 50px 35px;
-    border-radius: 30px;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  padding: 50px 35px;
+  border-radius: 30px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
 .value-card:hover {
-    transform: translateY(-15px);
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 25px 50px rgba(0,0,0,0.1), 0 10px 20px rgba(0,0,0,0.05);
-    border-color: rgba(255, 255, 255, 0.9);
+  transform: translateY(-15px);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.9);
 }
 
 .value-icon {
-    font-size: 3.5rem;
-    color: #e31837;
-    margin-bottom: 30px;
-    padding: 20px;
-    background: linear-gradient(135deg, rgba(227,24,55,0.1), rgba(227,24,55,0.05));
-    border-radius: 50%;
-    display: inline-block;
-    border: 1px solid rgba(227,24,55,0.1);
+  font-size: 3.5rem;
+  color: #e31837;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(227, 24, 55, 0.1),
+    rgba(227, 24, 55, 0.05)
+  );
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid rgba(227, 24, 55, 0.1);
 }
 
 .value-card h3 {
-    color: #2c3e50;
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 15px;
+  color: #2c3e50;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 15px;
 }
 
 .value-card p {
-    color: #555;
-    line-height: 1.7;
-    font-size: 1.05rem;
+  color: #555;
+  line-height: 1.7;
+  font-size: 1.05rem;
 }
 
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 900px) {
-    .about-story {
-        flex-direction: column;
-        gap: 50px;
-    }
-    
-    .about-hero-content h1 {
-        font-size: 3rem;
-    }
+  .about-story {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .about-hero-content h1 {
+    font-size: 3rem;
+  }
 }

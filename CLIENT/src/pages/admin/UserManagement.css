@@ -1,206 +1,235 @@
-/* ====================================================
-   USER MANAGEMENT - GLASSMORPHISM & ANTIGRAVITY
-==================================================== */
-
 .user-management-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 }
 
 .user-management-title {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .btn-add-user {
-    background: linear-gradient(135deg, #2ecc71, #27ae60);
-    color: white;
-    border: none;
-    cursor: pointer;
-    padding: 12px 24px;
-    border-radius: 30px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(46, 204, 113, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-add-user:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(46, 204, 113, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(46, 204, 113, 0.4);
 }
 
-/* --- Dòng hiển thị User --- */
 .user-row {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .user-row.locked {
-    opacity: 0.6;
-    background: rgba(200,200,200,0.1);
+  opacity: 0.6;
+  background: rgba(200, 200, 200, 0.1);
 }
 
 .user-profile-cell {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-    color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  color: #2c3e50;
 }
 
 .user-avatar-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255,255,255,0.8);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-fullname-empty {
-    color: #95a5a6;
-    font-style: italic;
-    font-weight: 500;
+  color: #95a5a6;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .user-contact-email {
-    color: #2d4271;
-    font-weight: 600;
+  color: #2d4271;
+  font-weight: 600;
 }
 
 .user-contact-phone {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    margin-top: 4px;
-    font-weight: 500;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-top: 4px;
+  font-weight: 500;
 }
 
-/* --- Dropdown Phân Quyền --- */
 .role-select {
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(0,0,0,0.1);
-    font-weight: 700;
-    outline: none;
-    background: rgba(255,255,255,0.8);
-    transition: all 0.2s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 700;
+  outline: none;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s ease;
 }
 
-.role-select.role-admin { background: rgba(231, 76, 60, 0.1); color: #e74c3c; cursor: not-allowed; border-color: rgba(231, 76, 60, 0.2); }
-.role-select.role-partner { background: rgba(243, 156, 18, 0.1); color: #f39c12; cursor: pointer; border-color: rgba(243, 156, 18, 0.2); }
-.role-select.role-customer { background: rgba(52, 152, 219, 0.1); color: #3498db; cursor: pointer; border-color: rgba(52, 152, 219, 0.2); }
+.role-select.role-admin {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  cursor: not-allowed;
+  border-color: rgba(231, 76, 60, 0.2);
+}
+.role-select.role-partner {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+  cursor: pointer;
+  border-color: rgba(243, 156, 18, 0.2);
+}
+.role-select.role-customer {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+  cursor: pointer;
+  border-color: rgba(52, 152, 219, 0.2);
+}
 
-/* --- Cột Chiết khấu --- */
 .commission-cell {
-    text-align: center;
+  text-align: center;
 }
 
 .commission-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.4);
-    padding: 6px 14px;
-    border-radius: 30px;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 6px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
 }
 
 .commission-rate {
-    color: #e31837;
-    font-size: 14px;
-    font-weight: 800;
+  color: #e31837;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .btn-edit-commission {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    font-size: 15px;
-    color: #7f8c8d;
-    transition: color 0.2s;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 15px;
+  color: #7f8c8d;
+  transition: color 0.2s;
 }
-.btn-edit-commission:hover { color: #2c3e50; }
+.btn-edit-commission:hover {
+  color: #2c3e50;
+}
 
 .commission-empty {
-    color: #bdc3c7;
-    font-style: italic;
+  color: #bdc3c7;
+  font-style: italic;
 }
 
-/* --- Trạng thái --- */
 .status-badge {
-    font-weight: 800;
-    font-size: 13px;
-    padding: 6px 14px;
-    border-radius: 30px;
-    display: inline-block;
-    backdrop-filter: blur(40px) saturate(180%);
+  font-weight: 800;
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  display: inline-block;
+  backdrop-filter: blur(40px) saturate(180%);
 }
 
-.status-badge.active { color: #27ae60; background: rgba(46, 204, 113, 0.15); border: 1px solid rgba(46, 204, 113, 0.2); }
-.status-badge.locked { color: #e74c3c; background: rgba(231, 76, 60, 0.15); border: 1px solid rgba(231, 76, 60, 0.2); }
+.status-badge.active {
+  color: #27ae60;
+  background: rgba(46, 204, 113, 0.15);
+  border: 1px solid rgba(46, 204, 113, 0.2);
+}
+.status-badge.locked {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.15);
+  border: 1px solid rgba(231, 76, 60, 0.2);
+}
 
-/* --- Các nút hành động --- */
 .user-actions {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .btn-user-action {
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-user-action:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-.btn-user-action:disabled { cursor: not-allowed; opacity: 0.5; }
+.btn-user-action:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+.btn-user-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
-.btn-edit-user { background: linear-gradient(135deg, #3498db, #2980b9); }
-.btn-lock-user { background: linear-gradient(135deg, #e67e22, #d35400); }
-.btn-unlock-user { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-.btn-delete-user { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+.btn-edit-user {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+}
+.btn-lock-user {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+}
+.btn-unlock-user {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+.btn-delete-user {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
 
-/* ================= POPUP SWEETALERT ================= */
 .swal-user-title {
-    margin-bottom: 15px;
-    color: #2d4271;
-    font-weight: 800;
+  margin-bottom: 15px;
+  color: #2d4271;
+  font-weight: 800;
 }
 
 .swal-edit-label {
-    text-align: left;
-    display: block;
-    margin-top: 15px;
-    font-weight: 700;
-    color: #34495e;
+  text-align: left;
+  display: block;
+  margin-top: 15px;
+  font-weight: 700;
+  color: #34495e;
 }
 
 .swal-commission-text {
-    font-size: 14px;
-    color: #555;
-    margin-top: 5px;
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
 }
 
 .swal-commission-group {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .swal-commission-group label {
-    display: block;
-    font-weight: 700;
-    margin-bottom: 8px;
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
 .swal-commission-input {
-    width: 80%;
+  width: 80%;
 }
