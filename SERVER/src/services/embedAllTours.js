@@ -54,7 +54,7 @@ const generateCleanTextForEmbedding = (tour) => {
 const embedAllTours = async () => {
     try {
         console.log("⏳ Đang kết nối đến MongoDB...");
-        const dbURI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/taybac_tourism_db";
+        const dbURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/taybac_tourism_db";
         await mongoose.connect(dbURI);
         console.log("✅ Kết nối DB thành công!");
 
